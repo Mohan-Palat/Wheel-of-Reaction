@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import axios from 'axios'
 import React, { Component } from "react";
 import './App.css';
 
@@ -11,7 +12,9 @@ class App extends Component {
       scores: [0, 0, 0, 0],
       roundScores: [0, 0, 0, 0],
       currentPlayer: 0,
-      currentSpin: ''
+      currentSpin: '',
+      currentCategory: '',
+      currentPuzzle: ''
     };
     
   }
@@ -36,6 +39,22 @@ class App extends Component {
     roundScores[this.state.currentPlayer] = 0;
     this.setState = {roundScores};
     this.nextPlayer();
+  }
+
+  async getPuzzle(){
+    try {
+      const parsedCategories = await axios(
+        process.env.REACT_APP_MONGO_API_URL
+      );
+      console.log(parsedCategories.data.data);
+
+    } catch (err) {
+      console.log(err);
+    }
+
+    // this.setState = {
+    //   currentPuzzle: puzzle
+    // }
   }
 
   spinWheel(){
@@ -71,13 +90,6 @@ class App extends Component {
         this.setState = {
           currentSpin: landed
         }
-
-        
-
-
-
-
-      
     }
   }
 }
