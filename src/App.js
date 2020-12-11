@@ -14,16 +14,25 @@ class App extends Component {
       currentPlayer: 0,
       currentSpin: '',
       currentCategory: '',
-      currentPuzzle: ''
+      currentPuzzle: '',
+      usedWords: []
     };
     
   }
   render() {
     return (
       <div className="App">
-        <h1>Hi</h1>
+        
       </div>
     );
+  }
+
+  newRound(){
+    this.setState = {
+      roundScores: [0, 0, 0, 0],
+      round: this.state.round + 1,
+      usedWords: []
+    }
   }
   
   nextPlayer(){
@@ -32,6 +41,23 @@ class App extends Component {
       currentPlayer = 0;
     }
     this.setState = {currentPlayer};
+  }
+
+  inputLetter(letter){
+    const VOWELS = ['a', 'e', 'i', 'o', 'u'];
+
+    if ( VOWELS.includes(letter) ){
+      //do nothing
+    }
+    else if ( this.state.usedWords.includes(letter) ){
+      this.nextPlayer();
+    } 
+    else {
+      this.setState = {
+        usedWords: [...this.state.usedWords, letter]
+      }
+    }
+
   }
 
   bankruptPlayer(){
