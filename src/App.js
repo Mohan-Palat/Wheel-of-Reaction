@@ -1,11 +1,17 @@
-import logo from './logo.svg';
 import axios from 'axios'
 import React, { Component } from "react";
 import './App.css';
+import BoardContainer from './BoardContainer';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    let puzzle = [
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "A", "L", "M", "O", "N", "D", "", "", "", "", ""],
+        ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", ""]
+      ]
     this.state = {
       round: 1,
       players: ['red', 'yellow', 'blue'],
@@ -13,26 +19,50 @@ class App extends Component {
       roundScores: [0, 0, 0, 0],
       currentPlayer: 0,
       currentSpin: '',
-      currentCategory: '',
-      currentPuzzle: '',
-      usedWords: []
+      currentCategory: 'Food and Drink',
+      currentPuzzle: puzzle,
+      usedLetters: [],
+      playerInput: ""
     };
     
   }
   render() {
     return (
       <div className="App">
-        <BoardContainer />
+        <h1> Wheel of Fortune!!! </h1>
+        <BoardContainer currentPuzzle={this.state.currentPuzzle} usedLetters={this.state.usedLetters}/>
+        <h3>{this.state.currentCategory}</h3>
+        <input type="text"
+                onChange={this.handleAnswerChange}
+                value={this.state.playerInput}
+        /> 
+        <button onClick={this.inputLetter}> Submit Consonant</button>
+        <h4>Active Turn: {this.state.players[this.state.currentPlayer]}</h4>
+
       </div>
     );
   }
 
+  handleAnswerChange = (e) => {
+    const input = e.target.value;
+    console.log("Amount change val: ",input); 
+    if (input.length < 2){
+      this.setState({
+        playerInput: input
+      })
+
+    }
+
+  }
+
+
+
   newRound(){
-    this.setState = {
+    this.setState({
       roundScores: [0, 0, 0, 0],
       round: this.state.round + 1,
-      usedWords: []
-    }
+      usedLetters: []
+    })
   }
   
   nextPlayer(){
@@ -40,22 +70,23 @@ class App extends Component {
     if (this.state.currentPlayer === 2){
       currentPlayer = 0;
     }
-    this.setState = {currentPlayer};
+    this.setState({currentPlayer});
   }
 
-  inputLetter(letter){
-    const VOWELS = ['a', 'e', 'i', 'o', 'u'];
+  inputLetter=(e)=>{
+    const letter = this.state.playerInput.toUpperCase();
+    const VOWELS = ['A', 'E', 'I', 'O', 'U'];
 
     if ( VOWELS.includes(letter) ){
-      //do nothing
+      alert("No vowels allowed")
     }
-    else if ( this.state.usedWords.includes(letter) ){
+    else if ( this.state.usedLetters.includes(letter) ){
       this.nextPlayer();
     } 
     else {
-      this.setState = {
-        usedWords: [...this.state.usedWords, letter]
-      }
+      this.setState({
+        usedLetters: [...this.state.usedLetters, letter]
+      })
     }
 
   }
@@ -63,7 +94,7 @@ class App extends Component {
   bankruptPlayer(){
     let roundScores = this.state.roundScores;
     roundScores[this.state.currentPlayer] = 0;
-    this.setState = {roundScores};
+    this.setState({roundScores});
     this.nextPlayer();
   }
 
@@ -101,21 +132,21 @@ class App extends Component {
         let roundScores = this.state.roundScores;
         if (thirds === 0){
           roundScores[this.state.currentPlayer] += 1000000
-          this.setState = {roundScores}
+          this.setState({roundScores})
         } else { this.bankruptPlayer(); }
         break;
       case "WILD":
-        this.setState = {
+        this.setState({
           currentSpin: 500
-        }
+        })
         break;
       case "FREE":
         break;
 
       default:
-        this.setState = {
+        this.setState({
           currentSpin: landed
-        }
+        })
     }
   }
 }
