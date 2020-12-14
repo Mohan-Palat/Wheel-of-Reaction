@@ -57,9 +57,6 @@ class App extends Component {
         
         />
         
-        
-        
-
       </div>
     );
   }
@@ -70,12 +67,10 @@ class App extends Component {
       this.setState({
         playerInput: input
       })
-
     }
-
   }
-
   solve = () =>{
+    this.getPuzzle();
     let answer = prompt("Please solve the puzzle");
 
     if (answer != null) {
@@ -117,6 +112,7 @@ class App extends Component {
       round: this.state.round + 1,
       board: board
     })
+    this.getPuzzle();
   }
   
   nextPlayer(){
@@ -209,7 +205,7 @@ class App extends Component {
   async getPuzzle(){
     try {
       const parsedCategories = await axios(
-        process.env.REACT_APP_MONGO_API_URL
+        process.env.REACT_APP_MONGO_API_URL + "/getRanCat"
       );
       console.log(parsedCategories.data.data);
 
