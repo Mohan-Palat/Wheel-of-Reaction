@@ -6,9 +6,9 @@ function BoardContainer(props) {
     const displayBoard = props.board.currentPuzzle.map(puzzle => {
         const displayedRow = puzzle.map(letter =>{
             if (letter === ""){
-                return <BoardTile letter="*" usedLetters={props.board.usedLetters}/>
+                return <BoardTile letter="*" board={props.board}/>
             }
-            return <BoardTile letter={letter} usedLetters={props.board.usedLetters}/>
+            return <BoardTile letter={letter} board={props.board}/>
             }) 
         return displayedRow;
 

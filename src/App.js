@@ -12,6 +12,8 @@ class App extends Component {
         ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", "", "", ""]
       ]
+    let phrase = "ALMOND CAKE"
+    let lettersLeft = phrase.split(" ").join("");
     this.state = {
       round: 1,
       players: {
@@ -26,9 +28,11 @@ class App extends Component {
       board: {
         currentSpin: -1,
         currentCategory: 'Food and Drink',
-        currentPhrase: 'ALMOND CAKE',
+        currentPhrase: phrase,
+        lettersLeft: lettersLeft,
         currentPuzzle: puzzle,
         usedLetters: [],
+        revealAll: false
 
       },
       playerInput: ""
@@ -38,16 +42,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1> Wheel of Fortune!!! </h1>
+        <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
         <BoardContainer board={this.state.board}/>
         <h3>{this.state.currentCategory}</h3>
         <InputContainer
                         inputLetter={this.inputLetter}
                         inputVowel={this.inputVowel}
+                        newRound={this.newRound}
                         players={this.state.players}
                         board={this.state.board}
                         handleAnswerChange={this.handleAnswerChange}
                         spinWheel = {this.spinWheel}
+                        solve = {this.solve}
         
         />
         
@@ -69,33 +75,42 @@ class App extends Component {
 
   }
 
-  solve(){
-    const answer = prompt("Please solve the puzzle");
+  solve = () =>{
+    let answer = prompt("Please solve the puzzle");
 
     if (answer != null) {
       answer = answer.toLowerCase();
-      answer.answer.trim();
-      answer.split(" ").join("");
-      phrase = this.state.board.currentPhrase.toLowerCase();
-      phrase.split(" ").join("");
+      answer.trim();
+      answer = answer.split(" ").join("");
+      let phrase = this.state.board.currentPhrase.toLowerCase();
+      phrase = phrase.split(" ").join("");
 
       if (answer === phrase){
-        let players = this.state.players;
-        players.winRound();
-        this.setState({players})
-        this.newRound();
+        this.endRound();
       }
-
-
-
+      else{
+        alert("Incorrect guess!");
+        this.nextPlayer();
+      }
     }
   }
 
-  newRound(){
+  endRound(){
     let players = this.state.players;
     let board = this.state.board;
+    players.winRound();
+    board.revealAll = true;
     players.roundScores = [0, 0, 0];
+    players.currentPlayerIndex = 0;
+    this.setState({players, board})
+
+  }
+
+  newRound = () =>{
+    let players = this.state.players;
+    let board = this.state.board;
     board.usedLetters = [];
+    board.revealAll = false;
 
     this.setState({
       players: players,
@@ -107,7 +122,8 @@ class App extends Component {
   nextPlayer(){
     let players = this.state.players;
     players.currentPlayerIndex = this.state.players.currentPlayerIndex + 1;
-    if (players.currentPlayerIndex === 2){
+    console.log(players);
+    if (players.currentPlayerIndex > 2){
       players.currentPlayerIndex = 0;
     }
     this.setState({players});
@@ -124,11 +140,16 @@ class App extends Component {
       }
       else{
         players.roundScores[players.currentPlayerIndex] -= 250;
+        board.lettersLeft = board.lettersLeft.split(letter).join("")
         board.usedLetters.push(letter);
         this.setState({
           players: players,
           board: board
         })
+
+        if (board.lettersLeft === 0){
+          this.endRound();
+        }
 
       }
     }
@@ -147,10 +168,12 @@ class App extends Component {
       alert("Vowels must be bought")
     }
     else if ( board.usedLetters.includes(letter) ){
+      board.currentSpin = -1;
       this.nextPlayer();
     }
     else if ( !board.currentPhrase.includes(letter) ){
       board.usedLetters.push(letter);
+      board.currentSpin = -1;
       this.setState({board})
       this.nextPlayer();
     }
@@ -158,15 +181,20 @@ class App extends Component {
       
       const rgxp = new RegExp(letter, "g");
       const count = (board.currentPhrase.match(rgxp) || []).length;
-      players.roundScores[players.currentPlayerIndex] += board.currentSpin * count 
+      players.scorePoints( board.currentSpin * count );
       console.log(players.scores);
       board.usedLetters.push(letter);
+      board.lettersLeft = board.lettersLeft.split(letter).join("")
       board.currentSpin = -1;
 
       this.setState({
         board: board,
         players: players
       })
+
+      if (board.lettersLeft === 0){
+        this.endRound();
+      }
     }
 
   }
