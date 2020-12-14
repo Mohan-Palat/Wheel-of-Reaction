@@ -39,6 +39,10 @@ class App extends Component {
     };
     
   }
+  componentDidMount() {
+    this.getPuzzle();
+  
+  }
   render() {
     return (
       <div className="App">
@@ -70,7 +74,6 @@ class App extends Component {
     }
   }
   solve = () =>{
-    this.getPuzzle();
     let answer = prompt("Please solve the puzzle");
 
     if (answer != null) {
@@ -207,15 +210,26 @@ class App extends Component {
       const parsedCategories = await axios(
         process.env.REACT_APP_MONGO_API_URL + "/getRanCat"
       );
-      console.log(parsedCategories.data.data);
+
+      let random = Math.floor(Math.random() * Math.floor(parsedCategories.data.phrases.length));
+      if (random !== 0 && random % 2 === 1){
+        if (random + 1 === parsedCategories.data.phrases.length)
+          random--;
+        else random++;
+      }
+      let phrases = parsedCategories.data.phrases;
+      let board = this.state.board;
+
+      board.currentPuzzle = phrases[random+1];
+      board.currentCategory = parsedCategories.data.name;
+      board.currentPhrase =  phrases[random][0];
+      board.lettersLeft =  phrases[random][0].split(" ").join("");
+      this.setState({board});
 
     } catch (err) {
       console.log(err);
     }
-
-    // this.setState = {
-    //   currentPuzzle: puzzle
-    // }
+    
   }
 
   spinWheel = () =>{

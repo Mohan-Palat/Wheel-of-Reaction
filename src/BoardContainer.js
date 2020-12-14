@@ -13,6 +13,12 @@ function BoardContainer(props) {
         return displayedRow;
 
     })
+
+    let usedLetters = ""; 
+    props.board.usedLetters.forEach(letter => {
+        usedLetters += letter+", "
+    });
+    usedLetters = usedLetters.slice(0, -2);
   
    
     return (
@@ -31,6 +37,8 @@ function BoardContainer(props) {
             <div id="display-4">
                 {displayBoard[3]}
             </div>
+            <h2>Used Letters: {usedLetters}</h2>
+            <h2>{props.board.currentCategory}</h2>
         </div>
     )
 
