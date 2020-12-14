@@ -2,12 +2,13 @@ import React from 'react';
 import BoardTile from './BoardTile';
 
 function BoardContainer(props) {
-    const displayBoard = props.currentPuzzle.map(puzzle => {
+    console.log(props);
+    const displayBoard = props.board.currentPuzzle.map(puzzle => {
         const displayedRow = puzzle.map(letter =>{
             if (letter === ""){
-                return <BoardTile letter="*" usedLetters={props.usedLetters}/>
+                return <BoardTile letter="*" usedLetters={props.board.usedLetters}/>
             }
-            return <BoardTile letter={letter} usedLetters={props.usedLetters}/>
+            return <BoardTile letter={letter} usedLetters={props.board.usedLetters}/>
             }) 
         return displayedRow;
 

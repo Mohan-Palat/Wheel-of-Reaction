@@ -2,28 +2,35 @@ import axios from 'axios'
 import React, { Component } from "react";
 import './App.css';
 import BoardContainer from './BoardContainer';
-
+import InputContainer from './InputContainer';
 class App extends Component {
   constructor(props) {
     super(props);
     let puzzle = [
         ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "A", "L", "M", "M", "M", "D", "", "", "", "", ""],
+        ["", "", "", "A", "L", "M", "O", "N", "D", "", "", "", "", ""],
         ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", "", "", ""]
       ]
     this.state = {
       round: 1,
-      players: ['red', 'yellow', 'blue'],
-      scores: [0, 0, 0, 0],
-      roundScores: [0, 0, 0, 0],
-      currentPlayer: 0,
-      currentSpin: '',
-      currentCategory: 'Food and Drink',
-      currentPhrase: 'ALMOND CAKE',
-      currentPuzzle: puzzle,
-      currentLetterInstances: 0,
-      usedLetters: [],
+      players: {
+        name: ['red', 'yellow', 'blue'],
+        scores: [0, 0, 0],
+        roundScores: [0, 0, 0],
+        currentPlayerIndex: 0,
+        getCurrentPlayer: function(){ return this.name[this.currentPlayerIndex]},
+        scorePoints: function(amount){ this.roundScores[this.currentPlayerIndex] += amount; },
+        winRound: function(){ this.scores[this.currentPlayerIndex] += this.roundScores[this.currentPlayerIndex]}
+      },
+      board: {
+        currentSpin: -1,
+        currentCategory: 'Food and Drink',
+        currentPhrase: 'ALMOND CAKE',
+        currentPuzzle: puzzle,
+        usedLetters: [],
+
+      },
       playerInput: ""
     };
     
@@ -32,18 +39,20 @@ class App extends Component {
     return (
       <div className="App">
         <h1> Wheel of Fortune!!! </h1>
-        <BoardContainer incrementLetterCount={this.incrementLetterCount} 
-                        currentPuzzle={this.state.currentPuzzle} 
-                        usedLetters={this.state.usedLetters}
-                        />
+        <BoardContainer board={this.state.board}/>
         <h3>{this.state.currentCategory}</h3>
-        <input type="text"
-                onChange={this.handleAnswerChange}
-                value={this.state.playerInput}
-        /> 
-        <button onClick={this.inputLetter}> Submit Consonant</button>
-        <h4>Active Turn: {this.state.players[this.state.currentPlayer]}</h4>
-        <h4>Letter instances: {this.currentLetterInstances}</h4>
+        <InputContainer
+                        inputLetter={this.inputLetter}
+                        inputVowel={this.inputVowel}
+                        players={this.state.players}
+                        board={this.state.board}
+                        handleAnswerChange={this.handleAnswerChange}
+                        spinWheel = {this.spinWheel}
+        
+        />
+        
+        
+        
 
       </div>
     );
@@ -60,61 +69,112 @@ class App extends Component {
 
   }
 
-  newRound(){
-    this.setState({
-      roundScores: [0, 0, 0, 0],
-      round: this.state.round + 1,
-      usedLetters: []
-    })
+  solve(){
+    const answer = prompt("Please solve the puzzle");
+
+    if (answer != null) {
+      answer = answer.toLowerCase();
+      answer.answer.trim();
+      answer.split(" ").join("");
+      phrase = this.state.board.currentPhrase.toLowerCase();
+      phrase.split(" ").join("");
+
+      if (answer === phrase){
+        let players = this.state.players;
+        players.winRound();
+        this.setState({players})
+        this.newRound();
+      }
+
+
+
+    }
   }
 
-  incrementLetterCount=(letter)=>{
-    console.log(letter);
-    // console.log(this.state.currentLetterInstances);
-    // const count = this.state.currentLetterInstances + 1;
-    // this.setState({
-    //   currentLetterInstances: count
-    // })
+  newRound(){
+    let players = this.state.players;
+    let board = this.state.board;
+    players.roundScores = [0, 0, 0];
+    board.usedLetters = [];
 
+    this.setState({
+      players: players,
+      round: this.state.round + 1,
+      board: board
+    })
   }
   
   nextPlayer(){
-    let currentPlayer = this.state.currentPlayer + 1;
-    if (this.state.currentPlayer === 2){
-      currentPlayer = 0;
+    let players = this.state.players;
+    players.currentPlayerIndex = this.state.players.currentPlayerIndex + 1;
+    if (players.currentPlayerIndex === 2){
+      players.currentPlayerIndex = 0;
     }
-    this.setState({currentPlayer});
+    this.setState({players});
+  }
+
+  inputVowel=(e)=>{
+    let players = this.state.players;
+    let board = this.state.board;
+    const VOWELS = ['A', 'E', 'I', 'O', 'U'];
+    const letter = this.state.playerInput.toUpperCase();
+    if ( VOWELS.includes(letter) && !board.usedLetters.includes(letter)){
+      if( players.roundScores[players.currentPlayerIndex] - 250 < 0){
+        alert("Not enough money to purchase vowel")
+      }
+      else{
+        players.roundScores[players.currentPlayerIndex] -= 250;
+        board.usedLetters.push(letter);
+        this.setState({
+          players: players,
+          board: board
+        })
+
+      }
+    }
+
   }
 
   inputLetter=(e)=>{
-    const letter = this.state.playerInput.toUpperCase();
-    const currentPhrase = this.state.currentPhrase.toUpperCase();
+    let players = this.state.players;
+    let board = this.state.board;
     const VOWELS = ['A', 'E', 'I', 'O', 'U'];
+    const letter = this.state.playerInput.toUpperCase();
+    board.currentPhrase = board.currentPhrase.toUpperCase();
+    
 
     if ( VOWELS.includes(letter) ){
-      alert("No vowels allowed")
+      alert("Vowels must be bought")
     }
-    else if ( this.state.usedLetters.includes(letter) ){
+    else if ( board.usedLetters.includes(letter) ){
       this.nextPlayer();
     }
-    else if ( !currentPhrase.includes(letter) ){
-      this.setState({
-        usedLetters: [...this.state.usedLetters, letter]
-      })
+    else if ( !board.currentPhrase.includes(letter) ){
+      board.usedLetters.push(letter);
+      this.setState({board})
       this.nextPlayer();
     }
     else {
+      
+      const rgxp = new RegExp(letter, "g");
+      const count = (board.currentPhrase.match(rgxp) || []).length;
+      players.roundScores[players.currentPlayerIndex] += board.currentSpin * count 
+      console.log(players.scores);
+      board.usedLetters.push(letter);
+      board.currentSpin = -1;
+
       this.setState({
-        usedLetters: [...this.state.usedLetters, letter]
+        board: board,
+        players: players
       })
     }
 
   }
 
   bankruptPlayer(){
-    let roundScores = this.state.roundScores;
-    roundScores[this.state.currentPlayer] = 0;
-    this.setState({roundScores});
+    let players = this.state.players;
+    players.roundScores[players.currentPlayerIndex] = 0;
+    this.setState({players});
     this.nextPlayer();
   }
 
@@ -134,39 +194,41 @@ class App extends Component {
     // }
   }
 
-  spinWheel(){
+  spinWheel = () =>{
     const WHEEL_VALS = [2500, 'WILD', 900, 700, 600, 650, 500, 700, 'BANK-MILLION', 
     600, 550, 500, 600, 'BANKRUPT', 650, 'FREE', 700, 'LOSE', 800, 500, 650, 500, 900, 'BANKRUPT'];
   
     let landed = WHEEL_VALS[ Math.floor(Math.random() * Math.floor(WHEEL_VALS.length)) ]
+    let board = this.state.board;
 
     switch(landed){
       case "BANKRUPT":
+        alert(this.state.players.getCurrentPlayer() + " has gone bankrupt!")
         this.bankruptPlayer();
         break;
       case "LOSE":
+        alert(this.state.players.getCurrentPlayer() + " has lost their turn!")
         this.nextPlayer();
         break;
       case "BANK-MILLION":
         let thirds = Math.floor(Math.random() * Math.floor(3));
-        let roundScores = this.state.roundScores;
+        let players = this.state.players;
         if (thirds === 0){
-          roundScores[this.state.currentPlayer] += 1000000
-          this.setState({roundScores})
+          players.roundScores[players.currentPlayerIndex] += 1000000
+          this.setState({players})
         } else { this.bankruptPlayer(); }
         break;
       case "WILD":
-        this.setState({
-          currentSpin: 500
-        })
+        board.currentSpin = 777;
+        this.setState({board});
         break;
       case "FREE":
         break;
 
       default:
-        this.setState({
-          currentSpin: landed
-        })
+        
+        board.currentSpin = landed;
+        this.setState({board})
     }
   }
 }
