@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     let puzzle = [
         ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "A", "L", "M", "O", "N", "D", "", "", "", "", ""],
+        ["", "", "", "A", "L", "M", "M", "M", "D", "", "", "", "", ""],
         ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", "", "", "", "", ""]
       ]
@@ -20,7 +20,9 @@ class App extends Component {
       currentPlayer: 0,
       currentSpin: '',
       currentCategory: 'Food and Drink',
+      currentPhrase: 'ALMOND CAKE',
       currentPuzzle: puzzle,
+      currentLetterInstances: 0,
       usedLetters: [],
       playerInput: ""
     };
@@ -30,7 +32,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1> Wheel of Fortune!!! </h1>
-        <BoardContainer currentPuzzle={this.state.currentPuzzle} usedLetters={this.state.usedLetters}/>
+        <BoardContainer incrementLetterCount={this.incrementLetterCount} 
+                        currentPuzzle={this.state.currentPuzzle} 
+                        usedLetters={this.state.usedLetters}
+                        />
         <h3>{this.state.currentCategory}</h3>
         <input type="text"
                 onChange={this.handleAnswerChange}
@@ -38,6 +43,7 @@ class App extends Component {
         /> 
         <button onClick={this.inputLetter}> Submit Consonant</button>
         <h4>Active Turn: {this.state.players[this.state.currentPlayer]}</h4>
+        <h4>Letter instances: {this.currentLetterInstances}</h4>
 
       </div>
     );
@@ -45,7 +51,6 @@ class App extends Component {
 
   handleAnswerChange = (e) => {
     const input = e.target.value;
-    console.log("Amount change val: ",input); 
     if (input.length < 2){
       this.setState({
         playerInput: input
@@ -55,14 +60,22 @@ class App extends Component {
 
   }
 
-
-
   newRound(){
     this.setState({
       roundScores: [0, 0, 0, 0],
       round: this.state.round + 1,
       usedLetters: []
     })
+  }
+
+  incrementLetterCount=(letter)=>{
+    console.log(letter);
+    // console.log(this.state.currentLetterInstances);
+    // const count = this.state.currentLetterInstances + 1;
+    // this.setState({
+    //   currentLetterInstances: count
+    // })
+
   }
   
   nextPlayer(){
@@ -75,6 +88,7 @@ class App extends Component {
 
   inputLetter=(e)=>{
     const letter = this.state.playerInput.toUpperCase();
+    const currentPhrase = this.state.currentPhrase.toUpperCase();
     const VOWELS = ['A', 'E', 'I', 'O', 'U'];
 
     if ( VOWELS.includes(letter) ){
@@ -82,7 +96,13 @@ class App extends Component {
     }
     else if ( this.state.usedLetters.includes(letter) ){
       this.nextPlayer();
-    } 
+    }
+    else if ( !currentPhrase.includes(letter) ){
+      this.setState({
+        usedLetters: [...this.state.usedLetters, letter]
+      })
+      this.nextPlayer();
+    }
     else {
       this.setState({
         usedLetters: [...this.state.usedLetters, letter]
