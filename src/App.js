@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import './App.css';
 import BoardContainer from './BoardContainer';
 import InputContainer from './InputContainer';
+import WheelContainer from './WheelContainer';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +48,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
+        <WheelContainer/>
+        {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
         <BoardContainer board={this.state.board}/>
         <h3>{this.state.currentCategory}</h3>
         <InputContainer
@@ -59,7 +62,7 @@ class App extends Component {
                         spinWheel = {this.spinWheel}
                         solve = {this.solve}
         
-        />
+        /> */}
         
       </div>
     );
@@ -120,7 +123,7 @@ class App extends Component {
   
   nextPlayer(){
     let players = this.state.players;
-    players.currentPlayerIndex = this.state.players.currentPlayerIndex + 1;
+    players.currentPlayerIndex++;
     console.log(players);
     if (players.currentPlayerIndex > 2){
       players.currentPlayerIndex = 0;
@@ -181,7 +184,6 @@ class App extends Component {
       const rgxp = new RegExp(letter, "g");
       const count = (board.currentPhrase.match(rgxp) || []).length;
       players.scorePoints( board.currentSpin * count );
-      console.log(players.scores);
       board.usedLetters.push(letter);
       board.lettersLeft = board.lettersLeft.split(letter).join("")
       board.currentSpin = -1;
