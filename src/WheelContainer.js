@@ -17,7 +17,8 @@ class WheelContainer extends Component {
             height: '800px',  
             transform: 'rotate(0deg)',
             transition: 'transform 10s cubic-bezier(.08,.1,.15,1)'
-        }
+        },
+        arrow : "stop"
 
       }
 
@@ -35,7 +36,8 @@ class WheelContainer extends Component {
         height: '800px',  
         transform: transform,
         transition: '5s'
-      }
+      },
+      arrow :"play"
     });
     let position = randomNum % 360;
     console.log("Our position: "+position);
@@ -48,12 +50,14 @@ class WheelContainer extends Component {
         <div onClick={this.spinWheel} className="game-btn spin-btn">Spin Wheel</div>
 
         <div className="wheel-container">
-        <Tween
+        
+        <Tween playState={PlayState[this.state.arrow]}
           from={{rotation: 0 }}
-          to={{ yoyo: true, rotation: -20, repeat: 90 }}
+          to={{ yoyo: true, rotation: -20, repeat: 40 }}
             duration={.1} >
             <div className="picker"></div>
         </Tween>
+       
             <img
             className="wheel"
             src="https://wheel.fhtl.byu.edu/images/wheel.png"
