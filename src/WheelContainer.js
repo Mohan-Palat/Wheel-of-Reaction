@@ -41,6 +41,7 @@ class WheelContainer extends Component {
     });
     let position = randomNum % 360;
     console.log("Our position: "+position);
+    this.onAssignSpin(position);
   };
 
 
@@ -68,53 +69,15 @@ class WheelContainer extends Component {
         </div>
     );
   }
+
+onAssignSpin(position){
+ this.props.handleAssignSpin(position)
 }
+  
+}
+
+
 
 export default WheelContainer;
 
-{
-  /* 
------------
 
-
-const $wheel = $('.wheel');
-const $spinButton = $('.spin-btn');
-const $picker = $('.picker');
-
-randomNum = 7.5;
-
-function spinWheel() {
-  //spins wheel randomly 
-  randomNum +=  180 + (15 * Math.round(Math.random() * 24));
-  $wheel.css({'transform': 'rotate(' + randomNum + 'deg)'});
-  let position = randomNum % 360;
-  console.log("Our position: "+position);
-  TweenMax.fromTo($picker, .1, {rotation: 0}, {yoyo: true, rotation: -20, repeat: 90});
-};
-
-
-function randomAnswer() {
-  //Selects a random answer from answers array
-  const randomSelection = answers[Math.floor(Math.random()*answers.length)];
-  let selectedAnswer = storeAnswer.push(randomSelection);
-};
-
-// Removes answer from arrays 
-function removeAnswer() {
-  storeAnswer = [];
-  newAnswer = [];
-};
-
-// Spins wheel on spin wheel button click
-$spinButton.on('click', function() {
-  spinWheel(); 
-  console.log(randomNum);
-    // alert when wheel stops spinning
-  if($('.wheel').css('transform')) {
-    console.log('spinning');
-  }
-  // $wheel.removeAttr('style');
-});
-
- */
-}

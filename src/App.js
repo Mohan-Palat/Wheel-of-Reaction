@@ -1,54 +1,59 @@
-import axios from 'axios'
+import axios from "axios";
 import React, { Component } from "react";
-import './App.css';
-import BoardContainer from './BoardContainer';
-import InputContainer from './InputContainer';
-import WheelContainer from './WheelContainer';
+import "./App.css";
+import BoardContainer from "./BoardContainer";
+import InputContainer from "./InputContainer";
+import WheelContainer from "./WheelContainer";
 
 class App extends Component {
   constructor(props) {
     super(props);
     let puzzle = [
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "A", "L", "M", "O", "N", "D", "", "", "", "", ""],
-        ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", ""]
-      ]
-    let phrase = "ALMOND CAKE"
+      ["", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "A", "L", "M", "O", "N", "D", "", "", "", "", ""],
+      ["", "", "", "C", "A", "K", "E", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", ""],
+    ];
+    let phrase = "ALMOND CAKE";
     let lettersLeft = phrase.split(" ").join("");
     this.state = {
       round: 1,
       players: {
-        name: ['red', 'yellow', 'blue'],
+        name: ["red", "yellow", "blue"],
         scores: [0, 0, 0],
         roundScores: [0, 0, 0],
         currentPlayerIndex: 0,
-        getCurrentPlayer: function(){ return this.name[this.currentPlayerIndex]},
-        scorePoints: function(amount){ this.roundScores[this.currentPlayerIndex] += amount; },
-        winRound: function(){ this.scores[this.currentPlayerIndex] += this.roundScores[this.currentPlayerIndex]}
+        getCurrentPlayer: function () {
+          return this.name[this.currentPlayerIndex];
+        },
+        scorePoints: function (amount) {
+          this.roundScores[this.currentPlayerIndex] += amount;
+        },
+        winRound: function () {
+          this.scores[this.currentPlayerIndex] += this.roundScores[
+            this.currentPlayerIndex
+          ];
+        },
       },
       board: {
         currentSpin: -1,
-        currentCategory: 'Food and Drink',
+        currentCategory: "Food and Drink",
         currentPhrase: phrase,
         lettersLeft: lettersLeft,
         currentPuzzle: puzzle,
         usedLetters: [],
-        revealAll: false
-
+        revealAll: false,
       },
-      playerInput: ""
+      playerInput: "",
     };
-    
   }
   componentDidMount() {
     this.getPuzzle();
-  
   }
   render() {
     return (
       <div className="App">
-        <WheelContainer/>
+        <WheelContainer handleAssignSpin={this.handleAssignSpin} />
         {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
         <BoardContainer board={this.state.board}/>
         <h3>{this.state.currentCategory}</h3>
@@ -63,20 +68,19 @@ class App extends Component {
                         solve = {this.solve}
         
         /> */}
-        
       </div>
     );
   }
 
   handleAnswerChange = (e) => {
     const input = e.target.value;
-    if (input.length < 2){
+    if (input.length < 2) {
       this.setState({
-        playerInput: input
-      })
+        playerInput: input,
+      });
     }
-  }
-  solve = () =>{
+  };
+  solve = () => {
     let answer = prompt("Please solve the puzzle");
 
     if (answer != null) {
@@ -86,28 +90,26 @@ class App extends Component {
       let phrase = this.state.board.currentPhrase.toLowerCase();
       phrase = phrase.split(" ").join("");
 
-      if (answer === phrase){
+      if (answer === phrase) {
         this.endRound();
-      }
-      else{
+      } else {
         alert("Incorrect guess!");
         this.nextPlayer();
       }
     }
-  }
+  };
 
-  endRound(){
+  endRound() {
     let players = this.state.players;
     let board = this.state.board;
     players.winRound();
     board.revealAll = true;
     players.roundScores = [0, 0, 0];
     players.currentPlayerIndex = 0;
-    this.setState({players, board})
-
+    this.setState({ players, board });
   }
 
-  newRound = () =>{
+  newRound = () => {
     let players = this.state.players;
     let board = this.state.board;
     board.usedLetters = [];
@@ -116,161 +118,168 @@ class App extends Component {
     this.setState({
       players: players,
       round: this.state.round + 1,
-      board: board
-    })
+      board: board,
+    });
     this.getPuzzle();
-  }
-  
-  nextPlayer(){
+  };
+
+  nextPlayer() {
     let players = this.state.players;
     players.currentPlayerIndex++;
     console.log(players);
-    if (players.currentPlayerIndex > 2){
+    if (players.currentPlayerIndex > 2) {
       players.currentPlayerIndex = 0;
     }
-    this.setState({players});
+    this.setState({ players });
   }
 
-  inputVowel=(e)=>{
+  inputVowel = (e) => {
     let players = this.state.players;
     let board = this.state.board;
-    const VOWELS = ['A', 'E', 'I', 'O', 'U'];
+    const VOWELS = ["A", "E", "I", "O", "U"];
     const letter = this.state.playerInput.toUpperCase();
-    if ( VOWELS.includes(letter) && !board.usedLetters.includes(letter)){
-      if( players.roundScores[players.currentPlayerIndex] - 250 < 0){
-        alert("Not enough money to purchase vowel")
-      }
-      else{
+    if (VOWELS.includes(letter) && !board.usedLetters.includes(letter)) {
+      if (players.roundScores[players.currentPlayerIndex] - 250 < 0) {
+        alert("Not enough money to purchase vowel");
+      } else {
         players.roundScores[players.currentPlayerIndex] -= 250;
-        board.lettersLeft = board.lettersLeft.split(letter).join("")
+        board.lettersLeft = board.lettersLeft.split(letter).join("");
         board.usedLetters.push(letter);
         this.setState({
           players: players,
-          board: board
-        })
+          board: board,
+        });
 
-        if (board.lettersLeft === 0){
+        if (board.lettersLeft === 0) {
           this.endRound();
         }
-
       }
     }
+  };
 
-  }
-
-  inputLetter=(e)=>{
+  inputLetter = (e) => {
     let players = this.state.players;
     let board = this.state.board;
-    const VOWELS = ['A', 'E', 'I', 'O', 'U'];
+    const VOWELS = ["A", "E", "I", "O", "U"];
     const letter = this.state.playerInput.toUpperCase();
     board.currentPhrase = board.currentPhrase.toUpperCase();
-    
 
-    if ( VOWELS.includes(letter) ){
-      alert("Vowels must be bought")
-    }
-    else if ( board.usedLetters.includes(letter) ){
+    if (VOWELS.includes(letter)) {
+      alert("Vowels must be bought");
+    } else if (board.usedLetters.includes(letter)) {
       board.currentSpin = -1;
       this.nextPlayer();
-    }
-    else if ( !board.currentPhrase.includes(letter) ){
+    } else if (!board.currentPhrase.includes(letter)) {
       board.usedLetters.push(letter);
       board.currentSpin = -1;
-      this.setState({board})
+      this.setState({ board });
       this.nextPlayer();
-    }
-    else {
-      
+    } else {
       const rgxp = new RegExp(letter, "g");
       const count = (board.currentPhrase.match(rgxp) || []).length;
-      players.scorePoints( board.currentSpin * count );
+      players.scorePoints(board.currentSpin * count);
       board.usedLetters.push(letter);
-      board.lettersLeft = board.lettersLeft.split(letter).join("")
+      board.lettersLeft = board.lettersLeft.split(letter).join("");
       board.currentSpin = -1;
 
       this.setState({
         board: board,
-        players: players
-      })
+        players: players,
+      });
 
-      if (board.lettersLeft === 0){
+      if (board.lettersLeft === 0) {
         this.endRound();
       }
     }
+  };
 
-  }
-
-  bankruptPlayer(){
+  bankruptPlayer() {
     let players = this.state.players;
     players.roundScores[players.currentPlayerIndex] = 0;
-    this.setState({players});
+    this.setState({ players });
     this.nextPlayer();
   }
 
-  async getPuzzle(){
+  async getPuzzle() {
     try {
       const parsedCategories = await axios(
         process.env.REACT_APP_MONGO_API_URL + "/getRanCat"
       );
 
-      let random = Math.floor(Math.random() * Math.floor(parsedCategories.data.phrases.length));
-      if (random !== 0 && random % 2 === 1){
-        if (random + 1 === parsedCategories.data.phrases.length)
-          random--;
+      let random = Math.floor(
+        Math.random() * Math.floor(parsedCategories.data.phrases.length)
+      );
+      if (random !== 0 && random % 2 === 1) {
+        if (random + 1 === parsedCategories.data.phrases.length) random--;
         else random++;
       }
       let phrases = parsedCategories.data.phrases;
       let board = this.state.board;
 
-      board.currentPuzzle = phrases[random+1];
+      board.currentPuzzle = phrases[random + 1];
       board.currentCategory = parsedCategories.data.name;
-      board.currentPhrase =  phrases[random][0];
-      board.lettersLeft =  phrases[random][0].split(" ").join("");
-      this.setState({board});
-
+      board.currentPhrase = phrases[random][0];
+      board.lettersLeft = phrases[random][0].split(" ").join("");
+      this.setState({ board });
     } catch (err) {
       console.log(err);
     }
-    
   }
 
-  spinWheel = () =>{
-    const WHEEL_VALS = [2500, 'WILD', 900, 700, 600, 650, 500, 700, 'BANK-MILLION', 
-    600, 550, 500, 600, 'BANKRUPT', 650, 'FREE', 700, 'LOSE', 800, 500, 650, 500, 900, 'BANKRUPT'];
+  spinWheel = (landed) => {
   
-    let landed = WHEEL_VALS[ Math.floor(Math.random() * Math.floor(WHEEL_VALS.length)) ]
     let board = this.state.board;
 
-    switch(landed){
+    switch (landed) {
       case "BANKRUPT":
-        alert(this.state.players.getCurrentPlayer() + " has gone bankrupt!")
+        alert(this.state.players.getCurrentPlayer() + " has gone bankrupt!");
         this.bankruptPlayer();
         break;
       case "LOSE":
-        alert(this.state.players.getCurrentPlayer() + " has lost their turn!")
+        alert(this.state.players.getCurrentPlayer() + " has lost their turn!");
         this.nextPlayer();
-        break;
-      case "BANK-MILLION":
-        let thirds = Math.floor(Math.random() * Math.floor(3));
-        let players = this.state.players;
-        if (thirds === 0){
-          players.roundScores[players.currentPlayerIndex] += 1000000
-          this.setState({players})
-        } else { this.bankruptPlayer(); }
-        break;
-      case "WILD":
-        board.currentSpin = 777;
-        this.setState({board});
         break;
       case "FREE":
         break;
 
       default:
-        
         board.currentSpin = landed;
-        this.setState({board})
+        this.setState({ board });
     }
-  }
+  };
+  handleAssignSpin = (position) => {
+    console.log("Assign spin position", position);
+    let WHEEL_VALS = new Map();
+    WHEEL_VALS.set(7.5, 5000);
+    WHEEL_VALS.set(22.5, "BANKRUPT");
+    WHEEL_VALS.set(37.5, 300);
+    WHEEL_VALS.set(52.5, 500);
+    WHEEL_VALS.set(67.5, 450);
+    WHEEL_VALS.set(82.5, 500);
+    WHEEL_VALS.set(97.5, 800);
+    WHEEL_VALS.set(112.5, "LOSE");
+    WHEEL_VALS.set(127.5, 700);
+    WHEEL_VALS.set(142.5, "FREE");
+    WHEEL_VALS.set(157.5, 650);
+    WHEEL_VALS.set(172.5, "BANKRUPT");
+    WHEEL_VALS.set(187.5, 900);
+    WHEEL_VALS.set(202.5, 500);
+    WHEEL_VALS.set(217.5, 350);
+    WHEEL_VALS.set(232.5, 600);
+    WHEEL_VALS.set(247.5, 500);
+    WHEEL_VALS.set(262.5, 400);
+    WHEEL_VALS.set(277.5, 550);
+    WHEEL_VALS.set(292.5, 800);
+    WHEEL_VALS.set(307.5, 300);
+    WHEEL_VALS.set(322.5, 700);
+    WHEEL_VALS.set(337.5, 900);
+    WHEEL_VALS.set(352.5, 500);
+
+   let value = WHEEL_VALS.get(position)
+    console.log("Value is ", value)
+
+    this.spinWheel(value)
+  };
 }
 
 export default App;
