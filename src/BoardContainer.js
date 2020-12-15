@@ -1,6 +1,7 @@
 import React from 'react';
 import BoardTile from './BoardTile';
 
+
 function BoardContainer(props) {
     console.log(props);
     const displayBoard = props.board.currentPuzzle.map(puzzle => {
@@ -23,8 +24,9 @@ function BoardContainer(props) {
    
     return (
 
-        
+       
         <div id="board-rows">
+            
             <div id="display-1">
                 {displayBoard[0]}
             </div>
@@ -40,6 +42,7 @@ function BoardContainer(props) {
             <h2>Used Letters: {usedLetters}</h2>
             <h2>{props.board.currentCategory}</h2>
         </div>
+     
     )
 
 

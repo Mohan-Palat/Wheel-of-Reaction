@@ -1,6 +1,12 @@
 
-
+#board-rows{
+  background-image: url("./image/wofboard.png") ;
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 1000px;
+}
 #board-rows > div {
   display: flex;
   flex-direction: row;
+  
 }

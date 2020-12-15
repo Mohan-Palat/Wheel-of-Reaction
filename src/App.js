@@ -53,11 +53,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <WheelContainer handleAssignSpin={this.handleAssignSpin} />
-        {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
+        {/* <WheelContainer handleAssignSpin={this.handleAssignSpin} /> */}
+         <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
         <BoardContainer board={this.state.board}/>
         <h3>{this.state.currentCategory}</h3>
-        <InputContainer
+        {/* <InputContainer
                         inputLetter={this.inputLetter}
                         inputVowel={this.inputVowel}
                         newRound={this.newRound}
@@ -67,7 +67,7 @@ class App extends Component {
                         spinWheel = {this.spinWheel}
                         solve = {this.solve}
         
-        /> */}
+        />  */}
       </div>
     );
   }
