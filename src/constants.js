@@ -1,4 +1,4 @@
-const VOWELS = ["A", "E", "I", "O", "U"];
+const VOWELS = 'AEIOU'.split('');
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
