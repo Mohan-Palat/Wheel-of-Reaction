@@ -39,7 +39,7 @@ function BoardContainer(props) {
             </div>
             {/* <h2>Used Letters: {usedLetters}</h2>*/}
             <div id="category">
-                {props.board.currentCategory}
+                {props.board.currentCategory.toUpperCase()}
             </div>
         </div>
     )
