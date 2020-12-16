@@ -1,5 +1,7 @@
 const VOWELS = ["A", "E", "I", "O", "U"];
 
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 const WHEEL_WEDGES = [5000, 'BANKRUPT', 300, 500, 450, 500, 800, 'LOSE', 700, 'FREE', 
     650, 'BANKRUPT', 900, 500, 350, 600, 500, 400, 550, 800, 300, 700, 900, 500]
     
@@ -11,4 +13,4 @@ WHEEL_WEDGES.forEach(wedge => {
     degree+=15;
 })
 
-export { VOWELS, WHEEL_WEDGES, WHEEL_VALS};
+export { VOWELS, WHEEL_WEDGES, WHEEL_VALS, ALPHABET};

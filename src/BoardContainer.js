@@ -23,25 +23,24 @@ function BoardContainer(props) {
    
     return (
 
-        
-        <div id="board-rows">
-            <div id="display-1">
-                {displayBoard[0]}
+            <div id="board-rows">
+                <div id="display-1">
+                    {displayBoard[0]}
+                </div>
+                <div id="display-2">
+                    {displayBoard[1]}
+                </div>
+                <div id="display-3">
+                    {displayBoard[2]}
+                </div>
+                <div id="display-4">
+                    {displayBoard[3]}
+                </div>
+                {/* <h2>Used Letters: {usedLetters}</h2>*/}
+                <div id="category">
+                    {props.board.currentCategory.toUpperCase()}
+                </div>
             </div>
-            <div id="display-2">
-                {displayBoard[1]}
-            </div>
-            <div id="display-3">
-                {displayBoard[2]}
-            </div>
-            <div id="display-4">
-                {displayBoard[3]}
-            </div>
-            {/* <h2>Used Letters: {usedLetters}</h2>*/}
-            <div id="category">
-                {props.board.currentCategory.toUpperCase()}
-            </div>
-        </div>
     )
 
     
