@@ -3,7 +3,7 @@ import React from 'react';
 function BoardTile(props) {
 
     let show = "hide";
-    if ( props.board.usedLetters.includes(props.letter) || props.board.revealAll === true){
+    if ( props.board.usedLetters.includes(props.letter) || props.board.revealAll === true ){
         show = "show";
     }
     else if (props.letter === '*')

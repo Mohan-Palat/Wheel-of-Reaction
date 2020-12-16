@@ -5,12 +5,16 @@ import BoardContainer from "./BoardContainer";
 import InputContainer from "./InputContainer";
 import WheelContainer from "./WheelContainer";
 import {VOWELS, WHEEL_VALS} from "./constants.js"
+import PlayerOptions from "./PlayerOptions"
+import SolvePhraseModal from "./SolvePhraseModal"
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      answer :"",
+      showSolvePhraseModal: false,
       round: 1,
       players: {
         name: ["red", "yellow", "blue"],
@@ -51,6 +55,8 @@ class App extends Component {
         {/* <WheelContainer handleAssignSpin={this.handleAssignSpin} /> */}
         {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1> */}
         <BoardContainer board={this.state.board}/>
+        <PlayerOptions openAndSolve={this.openAndSolve}/>
+        <SolvePhraseModal solveAnswerChange={this.solveAnswerChange} open={this.state.showSolvePhraseModal} solve={this.solve}/>
         {/* <h3>{this.state.currentCategory}</h3> */}
         {/* <InputContainer
                         inputLetter={this.inputLetter}
@@ -66,7 +72,12 @@ class App extends Component {
       </div>
     );
   }
-
+  openAndSolve = () => {
+    this.setState({
+      showSolvePhraseModal: true,
+    });
+  };
+ 
   handleAnswerChange = (e) => {
     const input = e.target.value;
     if (input.length < 2) {
@@ -75,11 +86,18 @@ class App extends Component {
       });
     }
   };
-  solve = () => {
-    let answer = prompt("Please solve the puzzle");
 
-    if (answer != null) {
-      answer = answer.toLowerCase();
+  solveAnswerChange = (e) => {
+    this.setState({
+       answer: e.currentTarget.value,
+    });
+  };
+  solve = (e) => {
+    //let answer = prompt("Please solve the puzzle");
+    e.preventDefault();
+
+    if (this.state.answer != null) {
+      let answer = this.state.answer.toLowerCase();
       answer.trim();
       answer = answer.split(" ").join("");
       let phrase = this.state.board.currentPhrase.toLowerCase();
