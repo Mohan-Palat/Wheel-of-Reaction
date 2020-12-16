@@ -2,14 +2,16 @@ import React from 'react';
 
 function BoardTile(props) {
 
-    let show = '__';
-    if ( props.board.usedLetters.includes(props.letter) || props.letter === '*' || props.board.revealAll === true){
-        show = props.letter;
+    let show = "hide";
+    if ( props.board.usedLetters.includes(props.letter) || props.board.revealAll === true){
+        show = "show";
     }
+    else if (props.letter === '*')
+        show = "green"
 
     return (
-        <div>
-            {show}
+        <div className={"tile " + show}>
+            {props.letter.toUpperCase()}
         </div>
     )
 

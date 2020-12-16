@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./App.css";
-// import BoardContainer from "./BoardContainer";
-// import InputContainer from "./InputContainer";
+import BoardContainer from "./BoardContainer";
+import InputContainer from "./InputContainer";
 import WheelContainer from "./WheelContainer";
 import {VOWELS, WHEEL_VALS} from "./constants.js"
 
@@ -49,9 +49,9 @@ class App extends Component {
     return (
       <div className="App">
         {/* <WheelContainer handleAssignSpin={this.handleAssignSpin} /> */}
-         <h1> Wheel of Fortune!!! - Round {this.state.round}</h1>
+        {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1> */}
         <BoardContainer board={this.state.board}/>
-        <h3>{this.state.currentCategory}</h3>
+        {/* <h3>{this.state.currentCategory}</h3> */}
         {/* <InputContainer
                         inputLetter={this.inputLetter}
                         inputVowel={this.inputVowel}

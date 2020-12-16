@@ -39,7 +39,7 @@ class WheelContainer extends Component {
         width: '800px', 
         height: '800px',  
         transform: transform,
-        transition: '3s'
+        transition: '5s'
       },
       arrow :"play",
       clicked: true
@@ -49,7 +49,7 @@ class WheelContainer extends Component {
       let position = randomNum % 360;
       console.log("Our position: "+position);
       this.onAssignSpin(position); 
-    }, 3000);
+    }, 5000);
     
   };
 
@@ -62,7 +62,7 @@ class WheelContainer extends Component {
         
         <Tween playState={PlayState[this.state.arrow]}
           from={{rotation: 0 }}
-          to={{ yoyo: true, rotation: -20, repeat: 30}}
+          to={{ yoyo: true, rotation: -20, repeat: 50}}
             duration={.1} >
             <div className="picker"></div>
         </Tween>

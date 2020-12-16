@@ -39,8 +39,10 @@ function BoardContainer(props) {
             <div id="display-4">
                 {displayBoard[3]}
             </div>
-            <h2>Used Letters: {usedLetters}</h2>
-            <h2>{props.board.currentCategory}</h2>
+            {/* <h2>Used Letters: {usedLetters}</h2>*/}
+            <div id="category">
+                {props.board.currentCategory}
+            </div>
         </div>
      
     )
