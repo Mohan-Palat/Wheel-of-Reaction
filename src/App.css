@@ -5,7 +5,6 @@
   background: grey;
 
 }
-
 #board-rows > div {
   display: flex;
   flex-direction: row;
@@ -55,4 +54,30 @@
   background: rgba(2,0,36, 1);
   background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgb(32, 32, 99) 48%, rgba(2,0,36,0) 100%);
   border-radius: 3%;
+}
+
+.playerscores {
+  display: flex;
+  margin: 15px;
+  align-items: center;
+  
+}
+.row {
+  display: flex;
+  flex-direction: row; 
+}
+.column { 
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+.team-column {
+  display: table-cell;
+  align-items: center;
+  width:400px;
+}
+.score {
+  display: block;
+  background-color: rgb(248, 225, 225);
+  border-radius: 1px;
 }

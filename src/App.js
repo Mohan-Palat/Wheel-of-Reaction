@@ -4,7 +4,10 @@ import "./App.css";
 import BoardContainer from "./BoardContainer";
 import InputContainer from "./InputContainer";
 import WheelContainer from "./WheelContainer";
+import PlayerInput from "./PlayerContainer"
 import {VOWELS, WHEEL_VALS} from "./constants.js"
+import { Card } from "semantic-ui-react";
+import PlayerContainer from "./PlayerContainer";
 
 
 class App extends Component {
@@ -62,7 +65,11 @@ class App extends Component {
                         spinWheel = {this.spinWheel}
                         solve = {this.solve}
         
-        />  */}
+        />   */}
+        <PlayerContainer
+            players={this.state.players}
+        />
+       
       </div>
     );
   }
