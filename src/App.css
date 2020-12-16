@@ -13,10 +13,10 @@
 }
 
 .tile {
-  width: 76px;
-  height: 110px;
-  margin: 2px;
-  border: black solid 5px;
+  width: 57px;
+  height: 82.5px;
+  margin: 1px;
+  border: black solid 9px;
   user-select: none;
 }
 
@@ -25,18 +25,18 @@
   color: transparent;
 }
 
-.hide {
+.show {
   color: transparent;
   background: white;
 
 }
 
-.show {
+.hide {
   color: black;
   text-align: center;
-  font-size: 90px;
+  font-size: 60px;
   font-family: 'Anton', sans-serif;
-  padding-top: 40px;
+  padding-top: 0px;
   background: white;
 }
 
@@ -44,15 +44,15 @@
   user-select: none;
   justify-content: center;
   margin: 10px;
-  padding-top: 20px;
+  padding-top: 4px;
   color: white;
-  font-family: 'Anton', sans-serif;
-  font-size: 30px;
-  width: 800px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 35px;
+  width: 1300px;
   height: 60px;
   border-top: white solid 2px;
   border-bottom: white solid 2px;
-  background: rgba(2,0,36, 0.4);
-  background: linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(9,9,121,0.7) 48%, rgba(2,0,36,0.7) 100%);
+  background: rgba(2,0,36, 1);
+  background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgb(32, 32, 99) 48%, rgba(2,0,36,0) 100%);
   border-radius: 3%;
 }
