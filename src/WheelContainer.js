@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 import './Wheel.scss';
+import wheel from './img/wheel.png'
 import {PlayState, Tween } from 'react-gsap';
 
 class WheelContainer extends Component {
@@ -68,7 +69,7 @@ class WheelContainer extends Component {
        
             <img
             className="wheel"
-            src="https://wheel.fhtl.byu.edu/images/wheel.png"
+            src={wheel}
             alt=""
             style={this.state.myStyle}
             onClick={this.spinWheel}

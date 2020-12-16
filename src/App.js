@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 import "./App.css";
-import BoardContainer from "./BoardContainer";
-import InputContainer from "./InputContainer";
+// import BoardContainer from "./BoardContainer";
+// import InputContainer from "./InputContainer";
 import WheelContainer from "./WheelContainer";
 import {VOWELS, WHEEL_VALS} from "./constants.js"
 
