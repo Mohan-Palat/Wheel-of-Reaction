@@ -4,8 +4,8 @@
 
 import React, {Component} from "react";
 import './Wheel.scss';
-import gsap from "gsap";
-import { Controls, PlayState, Tween } from 'react-gsap';
+import wheel from './img/wheel.png'
+import {PlayState, Tween } from 'react-gsap';
 
 class WheelContainer extends Component {
   constructor(props){
@@ -18,15 +18,19 @@ class WheelContainer extends Component {
             transform: 'rotate(0deg)',
             transition: 'transform 10s cubic-bezier(.08,.1,.15,1)'
         },
-        arrow : "stop"
-
+        arrow : "stop",
+        clicked: false
       }
 
   }
 
   spinWheel = () => {
+
+    if(this.state.clicked){
+      return;
+    }
+
     //spins wheel randomly 
-    let myStyle = this.state.myStyle;
     let randomNum = 7.5;
     randomNum +=  180 + (15 * Math.round(Math.random() * 24));
     let transform = 'rotate('+ randomNum + 'deg)';
@@ -35,44 +39,49 @@ class WheelContainer extends Component {
         width: '800px', 
         height: '800px',  
         transform: transform,
-        transition: '5s'
+        transition: '3s'
       },
-      arrow :"play"
+      arrow :"play",
+      clicked: true
     });
-    let position = randomNum % 360;
-    console.log("Our position: "+position);
-    this.onAssignSpin(position);
+    setTimeout(() => { 
+      this.setState({arrow:"stop"});
+      let position = randomNum % 360;
+      console.log("Our position: "+position);
+      this.onAssignSpin(position); 
+    }, 3000);
+    
   };
 
 
   render (){
     return (
         <div className="container-fluid">
-        <div onClick={this.spinWheel} className="game-btn spin-btn">Spin Wheel</div>
 
         <div className="wheel-container">
         
         <Tween playState={PlayState[this.state.arrow]}
           from={{rotation: 0 }}
-          to={{ yoyo: true, rotation: -20, repeat: 40 }}
+          to={{ yoyo: true, rotation: -20, repeat: 30}}
             duration={.1} >
             <div className="picker"></div>
         </Tween>
        
             <img
             className="wheel"
-            src="https://wheel.fhtl.byu.edu/images/wheel.png"
+            src={wheel}
             alt=""
             style={this.state.myStyle}
+            onClick={this.spinWheel}
             />
         </div>
         </div>
     );
   }
 
-onAssignSpin(position){
- this.props.handleAssignSpin(position)
-}
+  onAssignSpin(position){
+    this.props.handleAssignSpin(position)
+  }
   
 }
 
