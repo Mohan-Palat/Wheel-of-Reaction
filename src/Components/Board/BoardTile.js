@@ -1,5 +1,5 @@
 import React from 'react';
-import {ALPHABET} from "../../js/constants.js"
+import {ALPHABET} from "../../imports/constants.js"
 
 function BoardTile(props) {
 

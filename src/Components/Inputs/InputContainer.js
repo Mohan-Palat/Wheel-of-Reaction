@@ -3,7 +3,7 @@ import PlayerOptions from "./PlayerOptions";
 import LetterSelector from "./LetterSelector";
 import SpinWheelModal from "./Modals/SpinWheelModal";
 import SolvePhraseModal from "./Modals/SolvePhraseModal";
-import {WHEEL_VALS} from "../../js/constants.js";
+import {WHEEL_VALS} from "../../imports/constants.js";
 
 class InputContainer extends Component {
     constructor(props){

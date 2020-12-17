@@ -5,8 +5,8 @@
 import React, {Component} from "react";
 import '../../styles/Wheel.scss';
 import {PlayState, Tween } from 'react-gsap';
-import {SOUNDS} from '../../js/sounds.js';
-import {IMAGES} from '../../js/images.js';
+import {SOUNDS} from '../../imports/sounds.js';
+import {IMAGES} from '../../imports/images.js';
 
 class WheelContainer extends Component {
   constructor(props){

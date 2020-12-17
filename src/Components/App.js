@@ -4,9 +4,9 @@ import Sound from 'react-sound';
 import "../styles/App.css";
 import BoardContainer from "./Board/BoardContainer";
 import InputContainer from "./Inputs/InputContainer";
-import {VOWELS, ALPHABET} from "../js/constants.js";
-import {SOUNDS} from "../js/sounds.js";
-import {IMAGES} from "../js/images.js";
+import {VOWELS, ALPHABET} from "../imports/constants.js";
+import {SOUNDS} from "../imports/sounds.js";
+import {IMAGES} from "../imports/images.js";
 import PlayerContainer from "./Players/PlayerContainer";
 
 import "semantic-ui-css/semantic.min.css";

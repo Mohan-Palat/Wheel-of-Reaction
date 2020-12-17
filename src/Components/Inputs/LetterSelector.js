@@ -1,5 +1,5 @@
 import React from 'react';
-import {ALPHABET, VOWELS} from "../../js/constants.js"
+import {ALPHABET, VOWELS} from "../../imports/constants.js"
 
 function LetterSelector(props) {
 
