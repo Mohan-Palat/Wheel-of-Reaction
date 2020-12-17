@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { Component } from "react";
+import Sound from 'react-sound';
 import "../styles/App.css";
 import BoardContainer from "./Board/BoardContainer";
 import InputContainer from "./Inputs/InputContainer";
 import {VOWELS, ALPHABET} from "../js/constants.js";
-
+import {SOUNDS} from "../js/sounds.js";
 import PlayerContainer from "./Players/PlayerContainer";
 
 import "semantic-ui-css/semantic.min.css";
@@ -44,6 +45,10 @@ class App extends Component {
         currentPuzzle: [],
         usedLetters: [],
         revealAll: false,
+      },
+      sounds: {
+        currentSound: '',
+        soundStatus: 'STOPPED'
       }
     };
   }
@@ -60,12 +65,32 @@ class App extends Component {
           solve={this.solve}
           board={this.state.board}
           newRound={this.newRound}
+          triggerSound={this.triggerSound}
         />
         <PlayerContainer
           players={this.state.players}
         />
+        <Sound
+          url={this.state.currentSound}
+          playStatus={Sound.status[this.state.soundStatus]}
+          onFinishedPlaying={this.endSounds}
+        />
       </div>
     );
+  }
+
+  triggerSound = (sound) =>{
+    this.setState({
+      currentSound: sound,
+      soundStatus: 'PLAYING'
+    })
+  }
+
+  endSounds = () =>{
+    this.setState({
+      soundStatus: 'STOPPED'
+    })
+
   }
 
   endRound() {
@@ -77,6 +102,7 @@ class App extends Component {
     );
     let players = this.state.players;
     let board = this.state.board;
+    this.triggerSound(SOUNDS.puzzleSolve);
     players.winRound();
     board.revealAll = true;
     board.lettersLeft = "";
@@ -136,8 +162,14 @@ class App extends Component {
     board.lettersLeft = board.lettersLeft.split(letter).join("");
     this.setState({ players, board });
 
-    if (points === 0) return this.nextPlayer();       //if no points are awarded, letter was not in puzzle, so move to next player
+    if (points === 0){
+      this.triggerSound(SOUNDS.buzz);
+      return this.nextPlayer();     //if no points are awarded, letter was not in puzzle, so move to next player   
 
+    }    
+    
+    this.triggerSound(SOUNDS.ding);
+    
     console.log(
       `Player ${players.getCurrentPlayer()} has played ${letter} for ${points} points!`
     );
@@ -169,6 +201,7 @@ class App extends Component {
   };
 
   bankruptPlayer() {
+    this.triggerSound(SOUNDS.bankrupt);
     let players = this.state.players;
     players.roundScores[players.currentPlayerIndex] = 0;
     this.setState({ players });
@@ -197,6 +230,7 @@ class App extends Component {
         if (random + 1 === parsedCategories.data.phrases.length) random--;
         else random++;
       }
+      this.triggerSound(SOUNDS.puzzleReveal);
       let phrases = parsedCategories.data.phrases;
       let board = this.state.board;
 
@@ -235,6 +269,7 @@ class App extends Component {
         console.log(
           this.state.players.getCurrentPlayer() + " has lost their turn!"
         );
+        this.triggerSound(SOUNDS.buzz);
         this.nextPlayer();
         break;
       case "FREE":

@@ -6,6 +6,7 @@ import React, {Component} from "react";
 import '../../styles/Wheel.scss';
 import wheel from '../../img/wheel.png'
 import {PlayState, Tween } from 'react-gsap';
+import {SOUNDS} from '../../js/sounds.js';
 
 class WheelContainer extends Component {
   constructor(props){
@@ -29,7 +30,7 @@ class WheelContainer extends Component {
     if(this.state.clicked){
       return;
     }
-
+    this.props.triggerSound(SOUNDS.wheelSpin);
     //spins wheel randomly 
     let randomNum = 7.5;
     randomNum +=  180 + (15 * Math.round(Math.random() * 24));

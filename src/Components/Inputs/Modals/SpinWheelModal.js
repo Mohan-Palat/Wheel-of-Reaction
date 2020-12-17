@@ -7,7 +7,7 @@ const SpinWheelModal = (props) => {
   return (
     <Modal basic size="large"  open={props.open} center >
       <Modal.Content >
-        <WheelContainer handleAssignSpin={props.handleAssignSpin} />
+        <WheelContainer triggerSound={props.triggerSound} handleAssignSpin={props.handleAssignSpin} />
       </Modal.Content>
     </Modal>
   );

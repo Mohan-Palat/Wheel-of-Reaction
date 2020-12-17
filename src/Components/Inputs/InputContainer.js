@@ -35,6 +35,7 @@ class InputContainer extends Component {
         <SpinWheelModal
           open={this.state.showSpinWheelModal}
           handleAssignSpin={this.handleAssignSpin}
+          triggerSound={this.props.triggerSound}
         />
         <SolvePhraseModal
           solveAnswerChange={this.solveAnswerChange}
