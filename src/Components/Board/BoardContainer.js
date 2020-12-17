@@ -2,6 +2,8 @@ import React from 'react';
 import BoardTile from './BoardTile';
 
 
+
+
 function BoardContainer(props) {
     console.log(props);
     const displayBoard = props.board.currentPuzzle.map(puzzle => {
@@ -14,13 +16,6 @@ function BoardContainer(props) {
         return displayedRow;
 
     })
-
-    let usedLetters = ""; 
-    props.board.usedLetters.forEach(letter => {
-        usedLetters += letter+", "
-    });
-    usedLetters = usedLetters.slice(0, -2);
-  
    
     return (
 

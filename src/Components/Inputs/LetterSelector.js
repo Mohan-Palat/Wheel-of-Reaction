@@ -1,5 +1,5 @@
 import React from 'react';
-import {ALPHABET, VOWELS} from "./constants.js"
+import {ALPHABET, VOWELS} from "../../js/constants.js"
 
 function LetterSelector(props) {
 
@@ -8,7 +8,7 @@ function LetterSelector(props) {
         if(e.target.classList.contains('used')){
             return alert("Letter already used");
         }
-        //props.inputLetter(e.target.id);
+        props.inputLetter(e.target.id);
     }
     
     const resolveClass = (letter) => {
