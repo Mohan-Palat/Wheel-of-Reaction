@@ -70,7 +70,7 @@ class InputContainer extends Component {
       let answer = this.state.answer.toLowerCase();
       answer.trim();
       answer = answer.split(" ").join("");
-      let phrase = this.state.board.currentPhrase.toLowerCase();
+      let phrase = this.props.board.currentPhrase.toLowerCase();
       phrase = phrase.split(" ").join("");
 
       this.props.solve(answer, phrase);

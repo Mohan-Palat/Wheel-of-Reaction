@@ -18,7 +18,7 @@ class App extends Component {
       players: {
         name: ["red", "yellow", "blue"],
         scores: [0, 0, 0],
-        roundScores: [0, 0, 0],
+        roundScores: [9000, 0, 0],
         currentPlayerIndex: 0,
         freePlay: false,
         getCurrentPlayer: function () {
@@ -172,7 +172,7 @@ class App extends Component {
     this.nextPlayer();
   }
 
-  solve(answer, phrase){
+  solve=(answer, phrase) =>{
     if (answer === phrase) {
       this.endRound();
     } else {
