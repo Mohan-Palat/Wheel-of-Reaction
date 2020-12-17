@@ -4,23 +4,22 @@ import "./App.css";
 import BoardContainer from "./BoardContainer";
 import InputContainer from "./InputContainer";
 import WheelContainer from "./WheelContainer";
-import PlayerInput from "./PlayerContainer"
-import LetterSelector from './LetterSelector';
-import {VOWELS, WHEEL_VALS} from "./constants.js"
+import PlayerInput from "./PlayerContainer";
+import LetterSelector from "./LetterSelector";
+import { VOWELS, WHEEL_VALS } from "./constants.js";
 import { Card } from "semantic-ui-react";
 import PlayerContainer from "./PlayerContainer";
-import PlayerOptions from "./PlayerOptions"
-import SolvePhraseModal from "./SolvePhraseModal"
-import SpinWheelModal from "./SpinWheelModal"
-import 'semantic-ui-css/semantic.min.css';
-
+import PlayerOptions from "./PlayerOptions";
+import SolvePhraseModal from "./SolvePhraseModal";
+import SpinWheelModal from "./SpinWheelModal";
+import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      answer :"",
-      showSpinWheelModal : false,
+      answer: "",
+      showSpinWheelModal: false,
       showSolvePhraseModal: false,
       round: 1,
       players: {
@@ -57,20 +56,29 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    //this.getPuzzle();
+    this.getPuzzle();
   }
   render() {
     return (
-      
       <div className="App">
         {/* <LetterSelector usedLetters={this.state.board.usedLetters} inputLetter={this.inputLetter}/> */}
         {/* <WheelContainer handleAssignSpin={this.handleAssignSpin} /> */}
         {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1> */}
-        <BoardContainer board={this.state.board}/>
-        <PlayerOptions openAndSolve={this.openAndSolve} spinWheel={this.openAndSpin}/>
-        <SpinWheelModal open={this.state.showSpinWheelModal} handleAssignSpin={this.handleAssignSpin}/>
-        <SolvePhraseModal solveAnswerChange={this.solveAnswerChange} open={this.state.showSolvePhraseModal} solve={this.solve}/>
-        {/* <h3>{this.state.currentCategory}</h3> */}
+        <BoardContainer board={this.state.board} />
+        <PlayerOptions
+          openAndSolve={this.openAndSolve}
+          spinWheel={this.openAndSpin}
+        />
+        <SpinWheelModal
+          open={this.state.showSpinWheelModal}
+          handleAssignSpin={this.handleAssignSpin}
+        />
+        <SolvePhraseModal
+          solveAnswerChange={this.solveAnswerChange}
+          open={this.state.showSolvePhraseModal}
+          solve={this.solve}
+        />
+        <h3>{this.state.currentCategory}</h3>
         {/* <InputContainer
                         inputLetter={this.inputLetter}
                         inputVowel={this.inputVowel}
@@ -85,7 +93,6 @@ class App extends Component {
         {/* <PlayerContainer
             players={this.state.players}
         /> */}
-       
       </div>
     );
   }
@@ -110,7 +117,7 @@ class App extends Component {
 
   solveAnswerChange = (e) => {
     this.setState({
-       answer: e.currentTarget.value,
+      answer: e.currentTarget.value,
     });
   };
   solve = (e) => {
@@ -137,7 +144,12 @@ class App extends Component {
   };
 
   endRound() {
-    console.log("Round "+this.state.round+" has been won by "+this.state.players.getCurrentPlayer());
+    console.log(
+      "Round " +
+        this.state.round +
+        " has been won by " +
+        this.state.players.getCurrentPlayer()
+    );
     let players = this.state.players;
     let board = this.state.board;
     players.winRound();
@@ -164,73 +176,69 @@ class App extends Component {
   nextPlayer() {
     let players = this.state.players;
 
-    if (players.freePlay){
-      console.log(`${this.state.players.getCurrentPlayer()} has used their free play!`);
+    if (players.freePlay) {
+      console.log(
+        `${this.state.players.getCurrentPlayer()} has used their free play!`
+      );
       players.freePlay = false;
-    }
-    else{
+    } else {
       players.currentPlayerIndex++;
-      if (players.currentPlayerIndex > 2) 
-        players.currentPlayerIndex = 0;
+      if (players.currentPlayerIndex > 2) players.currentPlayerIndex = 0;
     }
 
     this.setState({ players });
   }
 
-  nextSpin(){ this.setSpinValue(-1)}
+  nextSpin() {
+    this.setSpinValue(-1);
+  }
 
-  setSpinValue(number){
+  setSpinValue(number) {
     let board = this.state.board;
     board.currentSpin = number;
-    this.setState({board})
+    this.setState({ board });
     console.log(`Current spin set to ${number}`);
   }
 
-
-  inputLetter = (letter) =>{ 
+  inputLetter = (letter) => {
     VOWELS.includes(letter) ? this.playVowel(letter) : this.playCons(letter);
 
-    if (this.state.board.lettersLeft.length < 1) 
-      this.endRound();
+    if (this.state.board.lettersLeft.length < 1) this.endRound();
+  };
 
-    
-  }
-
-  acceptLetter(letter, points){
+  acceptLetter(letter, points) {
     let board = this.state.board;
     let players = this.state.players;
     players.scorePoints(points);
     board.usedLetters.push(letter);
     board.lettersLeft = board.lettersLeft.split(letter).join("");
-    this.setState({players,board});
+    this.setState({ players, board });
 
-    if(points === 0)
-      return this.nextPlayer();
+    if (points === 0) return this.nextPlayer();
 
-    console.log(`Player ${players.getCurrentPlayer()} has played ${letter} for ${points} points!`);
-
+    console.log(
+      `Player ${players.getCurrentPlayer()} has played ${letter} for ${points} points!`
+    );
   }
- 
-  playVowel = (vowel) => {
 
-    if( this.state.players.getPlayerScore() - 250 < 0 ){
+  playVowel = (vowel) => {
+    if (this.state.players.getPlayerScore() - 250 < 0) {
       return alert("Not enough money to purchase vowel");
     }
 
     this.acceptLetter(vowel, -250);
-    
   };
 
   playCons = (cons) => {
-
     const rgxp = new RegExp(cons, "g");
     const count = (this.state.board.lettersLeft.match(rgxp) || []).length;
-    console.log(`Count of ${cons} in ${this.state.board.lettersLeft}: ${count}`);
+    console.log(
+      `Count of ${cons} in ${this.state.board.lettersLeft}: ${count}`
+    );
     const points = this.state.board.currentSpin * count;
     this.acceptLetter(cons, points);
     this.nextSpin();
-    
-  }
+  };
 
   bankruptPlayer() {
     let players = this.state.players;
@@ -266,28 +274,35 @@ class App extends Component {
   }
 
   spinWheel = (landed) => {
-  
     let board = this.state.board;
     let players = this.state.players;
     players.freePlay = false;
 
     switch (landed) {
       case "BANKRUPT":
-        console.log(this.state.players.getCurrentPlayer() + " has gone bankrupt!");
+        console.log(
+          this.state.players.getCurrentPlayer() + " has gone bankrupt!"
+        );
         this.bankruptPlayer();
         break;
       case "LOSE":
-        console.log(this.state.players.getCurrentPlayer() + " has lost their turn!");
+        console.log(
+          this.state.players.getCurrentPlayer() + " has lost their turn!"
+        );
         this.nextPlayer();
         break;
       case "FREE":
-        console.log(this.state.players.getCurrentPlayer() + " has earned a Free Play!");
+        console.log(
+          this.state.players.getCurrentPlayer() + " has earned a Free Play!"
+        );
         board.currentSpin = 500;
         players.freePlay = true;
-        this.setState({players, board});
+        this.setState({ players, board });
         break;
       default:
-        console.log(`${this.state.players.getCurrentPlayer()} has spun for $${landed}!`);
+        console.log(
+          `${this.state.players.getCurrentPlayer()} has spun for $${landed}!`
+        );
         board.currentSpin = landed;
         this.setState({ board });
     }
@@ -296,8 +311,8 @@ class App extends Component {
     this.setState({
       showSpinWheelModal: false,
     });
-    let value = WHEEL_VALS.get(position)
-    this.spinWheel(value)
+    let value = WHEEL_VALS.get(position);
+    this.spinWheel(value);
   };
 }
 
