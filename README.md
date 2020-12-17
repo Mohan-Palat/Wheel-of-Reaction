@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+#  **Project 4**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Wheel Of Fortune -  guess hidden phrases by guessing letters one at a time. 
 
-## Available Scripts
+### Installation
 
-In the project directory, you can run:
+No installation
 
-### `npm start`
+### &#x1F535; APP URL
+<a href="#" target="_blank">#TBD</a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### GitHub Project Repo
+<a href="https://github.com/d-mayo/project4-frontend/" target="_blank">React Frontend</a><br>
+<a href="https://github.com/ycjessie/project4-backend/" target="_blank">Express MongoDB Backend</a>
 
-### `npm test`
+### &#x1F535; Project Team
+Design - Development - Layout
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<ul>
+<li>Jessie Chen</li>
+<li>Lawrence DeMaio</li>
+<li>Cory Trast</li>
+</ul>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### &#x1F535; Approach 
+<ul>
+<li></li>
+</ul>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### &#x1F535; User Stories
+* As a user, can take turns spinning the wheel and then guessing a consonant in the current puzzle within 5 seconds of that spin 
+* As a user, can call a correct letter earns the value of the landed spin multiplied by the number of times that the letter appears in the puzzle
+* As a user, when guessing correctly, they can either Buy a vowel for a flat fee of $250. 
+* As a user, can continue to buy until out of money or no vowels remain OR Attempt to solve the puzzle OR Spin again and take another guess (unless their spin lands on a turn-losing space like bankrupt)
+* As a user, with the most money by the final round wins.
+ 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Stretch - As a user can run the Mocha javascrip testing
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### &#x1F535; **Technologies Used**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Frontend
+<ul>
+<li>HTML - Hyper Text Mark Up Language </li>
+<li>CSS, <a href="https://semantic-ui.com/i" target="_blank">Semantic UI</a></li>
+<li><a href="https://reactjs.org/" target="_blank">React</a>  the JavaScript library for building user interfaces</li>
+<li>JavaScript Animation <a href="https://bitworking.github.io/react-gsap/" target="_blank">GreenSock in React</a></li>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+</ul>
+Middleware
+<ul>
+<li>Axios </li>
+<li>Environment file Credential(.env) </li>
+<li>Express <a href="https://expressjs.com/en/resources/middleware/cors.html" target="_blank">CORS</a></li>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+</ul>
+Backend 
+   <ul>
+   <li><a href="https://www.nodejs.org/" target="_blank"> Node.js</a></li>
+   <li>RESTful Routes <ul>
+   <li>Route methods<a href="https://expressjs.com/" target="_blank"> Express.js</a>
+   <li>Route Testing<a href="https://www.postman.com/" target="_blank"> Postman</a></li></li></ul>
+   <li>Database<a href="https://www.mongodb.com/" target="_blank"> MongoDB</a></li>
+   <li>Data Modeling<a href="https://www.mongoose.com/" target="_blank"> Mongoose ODM</a></li>
+   <ul>
+      <li>Model/Schema</li>
+      <li>MongoDB connection</li>
+      <li>Authentication</li>
+      <li>Authorization</li>
+   </ul>
+   <li>Embedded Javascript Template<a href="https://ejs.co/" target="_blank"> EJS</a> </li>
+   <li>Javascript Test Framework<a href="https://mochajs.org/" target="_blank"> Mocha</a> </li>
+   
+   </ul>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+DevOps
+<ul>
+<li>Heroku - Platform as a service (PaaS) used to build and deploy applications</li>
+</ul>
 
-### Code Splitting
+### &#x1F535; **Components**
+![Components](https://github.com/ycjessie/project4-backend/blob/master/public/image/Components.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### &#x1F535; Future Enhancement
+<ul>
+<li>Save the Game</li>
+<li>Multiple players over the web</li>
+</ul>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### &#x1F535; Inspiration
+<ul>
+<li> <a href="https://codepen.io/twentysix/pen/abopqNp?editors=1111" target="_blank"> Wheel of fortune</a> by twentysix </li>
+<li> <a href="https://codepen.io/andere_s/pen/oqvroJ" target="_blank"> Wheel of fortune</a> by Andres </li>
+</ul>
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
