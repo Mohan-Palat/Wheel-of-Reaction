@@ -18,7 +18,7 @@ class App extends Component {
       players: {
         name: ["red", "yellow", "blue"],
         scores: [0, 0, 0],
-        roundScores: [9000, 0, 0],
+        roundScores: [0, 0, 0],
         currentPlayerIndex: 0,
         freePlay: false,
         getCurrentPlayer: function () {
@@ -59,6 +59,7 @@ class App extends Component {
           inputLetter={this.inputLetter}
           solve={this.solve}
           board={this.state.board}
+          newRound={this.newRound}
         />
         <PlayerContainer
           players={this.state.players}
@@ -78,6 +79,8 @@ class App extends Component {
     let board = this.state.board;
     players.winRound();
     board.revealAll = true;
+    board.lettersLeft = "";
+    board.currentSpin = -1;
     players.roundScores = [0, 0, 0];
     players.currentPlayerIndex = 0;
     this.setState({ players, board });

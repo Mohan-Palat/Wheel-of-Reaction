@@ -17,14 +17,21 @@ class InputContainer extends Component {
   render() {
     return (
       <>
-        <PlayerOptions
-          openAndSolve={this.openAndSolve}
-          spinWheel={this.openAndSpin}
-        />
-        <LetterSelector
-          usedLetters={this.props.board.usedLetters}
-          inputLetter={this.props.inputLetter}
-        />
+        {this.props.board.currentSpin !== -1 ? 
+           <LetterSelector
+            usedLetters={this.props.board.usedLetters}
+            inputLetter={this.props.inputLetter}
+           /> :
+           <PlayerOptions
+            openAndSolve={this.openAndSolve}
+            spinWheel={this.openAndSpin}
+            newRound={this.props.newRound}
+            board={this.props.board}
+           />
+        }
+        
+        
+        
         <SpinWheelModal
           open={this.state.showSpinWheelModal}
           handleAssignSpin={this.handleAssignSpin}

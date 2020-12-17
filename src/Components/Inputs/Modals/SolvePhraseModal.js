@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Form, Button, Label } from "semantic-ui-react";
 
 const SolvePhraseModal = (props) => {
-  console.log(props);
+
   return (
     <Modal open={props.open}>
       <Modal.Content>
