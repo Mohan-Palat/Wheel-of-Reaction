@@ -5,6 +5,7 @@
   background: grey;
 
 }
+
 #board-rows > div {
   display: flex;
   flex-direction: row;
@@ -53,7 +54,7 @@
   text-align: center;
   font-size: 60px;
   font-family: 'Anton', sans-serif;
-  padding-top: 0px;
+  padding-top: 23px;
   background: white;
 }
 
@@ -61,11 +62,11 @@
   user-select: none;
   justify-content: center;
   margin: 10px;
-  padding-top: 4px;
+  padding-top: 14px;
   color: white;
   font-family: 'Noto Sans TC', sans-serif;
   font-size: 35px;
-  width: 1300px;
+  width: 1000px;
   height: 60px;
   border-top: white solid 2px;
   border-bottom: white solid 2px;
@@ -74,31 +75,6 @@
   border-radius: 3%;
 }
 
-.playerscores {
-  display: flex;
-  margin: 15px;
-  align-items: center;
-  
-}
-.row {
-  display: flex;
-  flex-direction: row; 
-}
-.column { 
-  display: flex;
-  flex-direction: column;
-  flex: auto;
-}
-.team-column {
-  display: table-cell;
-  align-items: center;
-  width:400px;
-}
-.score {
-  display: block;
-  background-color: rgb(248, 225, 225);
-  border-radius: 1px;
-}  
 .vowel {
   border: solid gold 3px;
 }
