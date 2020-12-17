@@ -1,33 +1,45 @@
 import React from "react";
 
-
 function PlayerContainer(props) {
   let inputDisplay;
   return (
     <div>
       {inputDisplay}
       <h4>Active Turn: {props.players.getCurrentPlayer()}</h4>
-      <div className="playerscores">
-        <div className="row">
-          <div className="column">
-            <div className="team-column">Red  </div>
-            <div className="team-column">Round: <label className="score">{props.players.roundScores[0]} </label></div>
-            <div className="team-column">Totals: {props.players.scores[0]}</div>
-            
-          </div>
-          <div className="column">
-            <div className="team-column">Yellow </div>
-            <div className="team-column">Round: {props.players.roundScores[1]}</div> 
-            <div className="team-column">Totals: {props.players.scores[1]}</div>
-          </div>
-          <div className="column">
-            <div className="team-column">Blue </div>
-            <div className="team-column">Round: {props.players.roundScores[2]} </div>
-            <div className="team-column">Totals: {props.players.scores[2]}</div>
-            
-          </div>
-        </div>
-      </div>
+
+      <table>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Red</th>
+          <th>Yellow</th>
+          <th>Blue</th>
+        </tr>
+
+        <tr>
+          <td>Round</td>
+          <td class="round-red-td">
+            <b class="check">${props.players.roundScores[0]}</b>
+          </td>
+          <td class="round-yellow-td">
+            <b class="check">${props.players.roundScores[1]}</b>
+          </td>
+          <td class="round-blue-td">
+            <b class="check">${props.players.roundScores[2]}</b>
+          </td>
+        </tr>
+        <tr>
+          <td>Totals</td>
+          <td class="total-red-td">
+            <b class="check">${props.players.scores[0]}</b>
+          </td>
+          <td class="total-yellow-td">
+            <b class="check">${props.players.scores[1]}</b>
+          </td>
+          <td class="total-blue-td">
+            <b class="check">${props.players.scores[2]}</b>
+          </td>
+        </tr>
+      </table>
     </div>
   );
 }
