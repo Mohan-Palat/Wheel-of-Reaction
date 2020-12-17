@@ -97,5 +97,6 @@ DevOps
 <ul>
 <li> <a href="https://codepen.io/twentysix/pen/abopqNp?editors=1111" target="_blank"> Wheel of fortune</a> by twentysix </li>
 <li> <a href="https://codepen.io/andere_s/pen/oqvroJ" target="_blank"> Wheel of fortune</a> by Andres </li>
+<a target="_blank" href="https://icons8.com/icons/set/speaker">Speaker icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 </ul>
 

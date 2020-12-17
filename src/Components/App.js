@@ -6,6 +6,7 @@ import BoardContainer from "./Board/BoardContainer";
 import InputContainer from "./Inputs/InputContainer";
 import {VOWELS, ALPHABET} from "../js/constants.js";
 import {SOUNDS} from "../js/sounds.js";
+import {IMAGES} from "../js/images.js";
 import PlayerContainer from "./Players/PlayerContainer";
 
 import "semantic-ui-css/semantic.min.css";
@@ -48,7 +49,9 @@ class App extends Component {
       },
       sounds: {
         currentSound: '',
-        soundStatus: 'STOPPED'
+        status: 'STOPPED',
+        on: true,
+        muteIcon: IMAGES.soundOn 
       }
     };
   }
@@ -70,11 +73,15 @@ class App extends Component {
         <PlayerContainer
           players={this.state.players}
         />
-        <Sound
-          url={this.state.currentSound}
-          playStatus={Sound.status[this.state.soundStatus]}
-          onFinishedPlaying={this.endSounds}
-        />
+        {this.state.sounds.on ? 
+          <Sound
+            url={this.state.currentSound}
+            playStatus={Sound.status[this.state.soundStatus]}
+            onFinishedPlaying={this.endSounds}
+          /> : null
+        }
+        <img src={this.state.sounds.muteIcon} alt="mute" onClick={this.toggleSounds}/>
+        
       </div>
     );
   }
@@ -85,6 +92,21 @@ class App extends Component {
       soundStatus: 'PLAYING'
     })
   }
+
+  toggleSounds = () =>{
+    let sounds = this.state.sounds;
+
+    if(sounds.on){
+      sounds.on = false;
+      sounds.muteIcon = IMAGES.soundOff;
+    }
+    else{sounds.on = true; sounds.muteIcon = IMAGES.soundOn;}
+
+    this.setState({sounds})
+
+  }
+
+
 
   endSounds = () =>{
     this.setState({

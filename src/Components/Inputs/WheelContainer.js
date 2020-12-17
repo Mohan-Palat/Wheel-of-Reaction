@@ -4,9 +4,9 @@
 
 import React, {Component} from "react";
 import '../../styles/Wheel.scss';
-import wheel from '../../img/wheel.png'
 import {PlayState, Tween } from 'react-gsap';
 import {SOUNDS} from '../../js/sounds.js';
+import {IMAGES} from '../../js/images.js';
 
 class WheelContainer extends Component {
   constructor(props){
@@ -70,7 +70,7 @@ class WheelContainer extends Component {
        
             <img
             className="wheel"
-            src={wheel}
+            src={IMAGES.wheel}
             alt=""
             style={this.state.myStyle}
             onClick={this.spinWheel}
