@@ -1,17 +1,12 @@
 import axios from "axios";
 import React, { Component } from "react";
-import "./App.css";
-import BoardContainer from "./BoardContainer";
-import InputContainer from "./InputContainer";
-import WheelContainer from "./WheelContainer";
-import PlayerInput from "./PlayerContainer";
-import LetterSelector from "./LetterSelector";
-import { ALPHABET, VOWELS, WHEEL_VALS } from "./constants.js";
-import { Card } from "semantic-ui-react";
-import PlayerContainer from "./PlayerContainer";
-import PlayerOptions from "./PlayerOptions";
-import SolvePhraseModal from "./SolvePhraseModal";
-import SpinWheelModal from "./SpinWheelModal";
+import "../styles/App.css";
+import BoardContainer from "./Board/BoardContainer";
+import InputContainer from "./Inputs/InputContainer";
+import {VOWELS, ALPHABET} from "../js/constants.js";
+
+import PlayerContainer from "./Players/PlayerContainer";
+
 import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
@@ -19,8 +14,6 @@ class App extends Component {
     super(props);
     this.state = {
       answer: "",
-      showSpinWheelModal: false,
-      showSolvePhraseModal: false,
       round: 1,
       players: {
         name: ["red", "yellow", "blue"],
@@ -51,8 +44,7 @@ class App extends Component {
         currentPuzzle: [],
         usedLetters: [],
         revealAll: false,
-      },
-      playerInput: "",
+      }
     };
   }
   componentDidMount() {
@@ -62,73 +54,18 @@ class App extends Component {
     return (
       <div className="App">
         <BoardContainer board={this.state.board} />
-        <PlayerOptions
-          openAndSolve={this.openAndSolve}
-          spinWheel={this.openAndSpin}
-        />
-        <LetterSelector usedLetters={this.state.board.usedLetters} inputLetter={this.inputLetter}/>
-        <SpinWheelModal
-          open={this.state.showSpinWheelModal}
-          handleAssignSpin={this.handleAssignSpin}
-        />
-        <SolvePhraseModal
-          solveAnswerChange={this.solveAnswerChange}
-          open={this.state.showSolvePhraseModal}
+        <InputContainer
+          spinWheel={this.spinWheel}
+          inputLetter={this.inputLetter}
           solve={this.solve}
+          board={this.state.board}
         />
-        <h3>{this.state.currentCategory}</h3>
-           <PlayerContainer
-            players={this.state.players}
+        <PlayerContainer
+          players={this.state.players}
         />
       </div>
     );
   }
-  openAndSolve = () => {
-    this.setState({
-      showSolvePhraseModal: true,
-    });
-  };
-  openAndSpin = () => {
-    this.setState({
-      showSpinWheelModal: true,
-    });
-  };
-  handleAnswerChange = (e) => {
-    const input = e.target.value;
-    if (input.length < 2) {
-      this.setState({
-        playerInput: input,
-      });
-    }
-  };
-
-  solveAnswerChange = (e) => {
-    this.setState({
-      answer: e.currentTarget.value,
-    });
-  };
-  solve = (e) => {
-    //let answer = prompt("Please solve the puzzle");
-    e.preventDefault();
-    this.setState({
-      showSolvePhraseModal: false,
-    });
-
-    if (this.state.answer != null) {
-      let answer = this.state.answer.toLowerCase();
-      answer.trim();
-      answer = answer.split(" ").join("");
-      let phrase = this.state.board.currentPhrase.toLowerCase();
-      phrase = phrase.split(" ").join("");
-
-      if (answer === phrase) {
-        this.endRound();
-      } else {
-        alert("Incorrect guess!");
-        this.nextPlayer();
-      }
-    }
-  };
 
   endRound() {
     console.log(
@@ -187,12 +124,6 @@ class App extends Component {
     console.log(`Current spin set to ${number}`);
   }
 
-  inputLetter = (letter) => {
-    VOWELS.includes(letter) ? this.playVowel(letter) : this.playCons(letter);
-
-    if (this.state.board.lettersLeft.length < 1) this.endRound();
-  };
-  
   //process letter and points input then update game states
   acceptLetter(letter, points) {
     let board = this.state.board;
@@ -208,6 +139,12 @@ class App extends Component {
       `Player ${players.getCurrentPlayer()} has played ${letter} for ${points} points!`
     );
   }
+
+  inputLetter = (letter) => {
+    VOWELS.includes(letter) ? this.playVowel(letter) : this.playCons(letter);
+
+    if (this.state.board.lettersLeft.length < 1) this.endRound();
+  };
 
   playVowel = (vowel) => {
     if (this.state.players.getPlayerScore() - 250 < 0) {
@@ -233,6 +170,15 @@ class App extends Component {
     players.roundScores[players.currentPlayerIndex] = 0;
     this.setState({ players });
     this.nextPlayer();
+  }
+
+  solve(answer, phrase){
+    if (answer === phrase) {
+      this.endRound();
+    } else {
+      alert("Incorrect guess!");
+      this.nextPlayer();
+    }
   }
 
   async getPuzzle() {
@@ -305,13 +251,6 @@ class App extends Component {
     }
   };
   
-  handleAssignSpin = (position) => {
-    this.setState({
-      showSpinWheelModal: false,
-    });
-    let value = WHEEL_VALS.get(position);
-    this.spinWheel(value);
-  };
 }
 
 export default App;

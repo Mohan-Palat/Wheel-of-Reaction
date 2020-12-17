@@ -1,5 +1,5 @@
 import React from "react";
-import InputContainer from "./InputContainer";
+
 
 function PlayerContainer(props) {
   let inputDisplay;

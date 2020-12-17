@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Button, Label, Header } from "semantic-ui-react";
+import { Modal, Form, Button, Label } from "semantic-ui-react";
 
 const SolvePhraseModal = (props) => {
   console.log(props);

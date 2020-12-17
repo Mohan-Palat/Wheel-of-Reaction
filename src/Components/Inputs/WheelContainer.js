@@ -3,8 +3,8 @@
 //https://codepen.io/andere_s/pen/oqvroJ
 
 import React, {Component} from "react";
-import './Wheel.scss';
-import wheel from './img/wheel.png'
+import '../../styles/Wheel.scss';
+import wheel from '../../img/wheel.png'
 import {PlayState, Tween } from 'react-gsap';
 
 class WheelContainer extends Component {
