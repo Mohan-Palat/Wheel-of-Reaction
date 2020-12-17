@@ -14,10 +14,10 @@ class WheelContainer extends Component {
 
       this.state = {
         myStyle: {
-            width: '800px', 
-            height: '800px',  
+            width: '650px', 
+            height: '650px',  
             transform: 'rotate(0deg)',
-            transition: 'transform 10s cubic-bezier(.08,.1,.15,1)'
+            transition: 'transform 5s cubic-bezier(.08,.1,.15,1)'
         },
         arrow : "stop",
         clicked: false
@@ -30,27 +30,31 @@ class WheelContainer extends Component {
     if(this.state.clicked){
       return;
     }
-    this.props.triggerSound(SOUNDS.wheelSpin);
+    //this.props.triggerSound(SOUNDS.wheelSpin);
     //spins wheel randomly 
     let randomNum = 7.5;
     randomNum +=  180 + (15 * Math.round(Math.random() * 24));
     let transform = 'rotate('+ randomNum + 'deg)';
     this.setState({
       myStyle: {
-        width: '800px', 
-        height: '800px',  
+        width: '650px', 
+        height: '650px',  
         transform: transform,
         transition: '5s'
       },
       arrow :"play",
       clicked: true
     });
+    const clickSound = setInterval(() => {
+      this.props.triggerSound(SOUNDS.wheelClick);
+    }, 300)
     setTimeout(() => { 
       this.setState({arrow:"stop"});
       let position = randomNum % 360;
       console.log("Our position: "+position);
       this.onAssignSpin(position); 
-    }, 5000);
+      clearInterval(clickSound);
+    }, 4300);
     
   };
 
@@ -63,8 +67,8 @@ class WheelContainer extends Component {
         
         <Tween playState={PlayState[this.state.arrow]}
           from={{rotation: 0 }}
-          to={{ yoyo: true, rotation: -20, repeat: 50}}
-            duration={.1} >
+          to={{ yoyo: true, rotation: -20, repeat: 30}}
+            duration={.15} >
             <div className="picker"></div>
         </Tween>
        

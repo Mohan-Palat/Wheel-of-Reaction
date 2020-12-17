@@ -1,3 +1,11 @@
+#board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: grey;
+
+}
+
 #board-rows {
   display: flex;
   flex-direction: column;
@@ -31,11 +39,15 @@
   
 }
 
+#category {
+  text-align: center;
+}
+
 .tile {
   width: 57px;
   height: 82.5px;
   margin: 1px;
-  border: black solid 9px;
+  border: black solid 7px;
   user-select: none;
 }
 

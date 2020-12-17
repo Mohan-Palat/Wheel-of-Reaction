@@ -58,9 +58,12 @@ class InputContainer extends Component {
   };
 
   handleAssignSpin = (position) => {
-    this.setState({
-      showSpinWheelModal: false,
-    });
+    setTimeout(() => { 
+      this.setState({
+        showSpinWheelModal: false,
+      });
+    }, 3000);
+    
     let value = WHEEL_VALS.get(position);
     this.props.spinWheel(value);
   };

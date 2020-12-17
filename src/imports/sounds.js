@@ -3,7 +3,7 @@ import buzz from '../sound/Buzzer.mp3';
 import bankrupt from '../sound/Bankrupt.mp3';
 import puzzleReveal from '../sound/Puzzle_Reveal.mp3';
 import puzzleSolve from '../sound/Puzzle_Solve.mp3';
-import wheelSpin from '../sound/Wheel_Spin.mp3';
+import wheelClick from '../sound/Wheel_Click.mp3';
 
 const SOUNDS = {
     ding,
@@ -11,7 +11,7 @@ const SOUNDS = {
     bankrupt,
     puzzleReveal,
     puzzleSolve,
-    wheelSpin
+    wheelClick
 }
 
 export {SOUNDS};

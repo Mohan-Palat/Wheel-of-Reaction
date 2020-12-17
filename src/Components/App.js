@@ -62,17 +62,19 @@ class App extends Component {
     return (
       <div className="App">
         <BoardContainer board={this.state.board} />
-        <InputContainer
-          spinWheel={this.spinWheel}
-          inputLetter={this.inputLetter}
-          solve={this.solve}
-          board={this.state.board}
-          newRound={this.newRound}
-          triggerSound={this.triggerSound}
-        />
-        <PlayerContainer
-          players={this.state.players}
-        />
+        <div id="menu-panel">
+          <InputContainer
+            spinWheel={this.spinWheel}
+            inputLetter={this.inputLetter}
+            solve={this.solve}
+            board={this.state.board}
+            newRound={this.newRound}
+            triggerSound={this.triggerSound}
+          />
+          <PlayerContainer
+            players={this.state.players}
+          />
+        </div>
         {this.state.sounds.on ? 
           <Sound
             url={this.state.currentSound}
@@ -295,6 +297,7 @@ class App extends Component {
         this.nextPlayer();
         break;
       case "FREE":
+        this.triggerSound(SOUNDS.ding);
         console.log(
           this.state.players.getCurrentPlayer() + " has earned a Free Play!"
         );
@@ -303,6 +306,7 @@ class App extends Component {
         this.setState({ players, board });
         break;
       default:
+        this.triggerSound(SOUNDS.ding);
         console.log(
           `${this.state.players.getCurrentPlayer()} has spun for $${landed}!`
         );
