@@ -1,6 +1,7 @@
 import React from 'react';
 import BoardTile from './BoardTile';
 
+
 function BoardContainer(props) {
     console.log(props);
     const displayBoard = props.board.currentPuzzle.map(puzzle => {
