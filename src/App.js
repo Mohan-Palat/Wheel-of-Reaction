@@ -7,6 +7,8 @@ import WheelContainer from "./WheelContainer";
 import {VOWELS, WHEEL_VALS} from "./constants.js"
 import PlayerOptions from "./PlayerOptions"
 import SolvePhraseModal from "./SolvePhraseModal"
+import SpinWheelModal from "./SpinWheelModal"
+import 'semantic-ui-css/semantic.min.css';
 
 
 class App extends Component {
@@ -14,6 +16,7 @@ class App extends Component {
     super(props);
     this.state = {
       answer :"",
+      showSpinWheelModal : false,
       showSolvePhraseModal: false,
       round: 1,
       players: {
@@ -51,11 +54,13 @@ class App extends Component {
   }
   render() {
     return (
+      
       <div className="App">
         {/* <WheelContainer handleAssignSpin={this.handleAssignSpin} /> */}
         {/* <h1> Wheel of Fortune!!! - Round {this.state.round}</h1> */}
         <BoardContainer board={this.state.board}/>
-        <PlayerOptions openAndSolve={this.openAndSolve}/>
+        <PlayerOptions openAndSolve={this.openAndSolve} spinWheel={this.openAndSpin}/>
+        <SpinWheelModal open={this.state.showSpinWheelModal} handleAssignSpin={this.handleAssignSpin}/>
         <SolvePhraseModal solveAnswerChange={this.solveAnswerChange} open={this.state.showSolvePhraseModal} solve={this.solve}/>
         {/* <h3>{this.state.currentCategory}</h3> */}
         {/* <InputContainer
@@ -77,7 +82,11 @@ class App extends Component {
       showSolvePhraseModal: true,
     });
   };
- 
+  openAndSpin = () => {
+    this.setState({
+      showSpinWheelModal: true,
+    });
+  };
   handleAnswerChange = (e) => {
     const input = e.target.value;
     if (input.length < 2) {
@@ -95,6 +104,9 @@ class App extends Component {
   solve = (e) => {
     //let answer = prompt("Please solve the puzzle");
     e.preventDefault();
+    this.setState({
+      showSolvePhraseModal: false,
+    });
 
     if (this.state.answer != null) {
       let answer = this.state.answer.toLowerCase();
@@ -272,6 +284,9 @@ class App extends Component {
     }
   };
   handleAssignSpin = (position) => {
+    this.setState({
+      showSpinWheelModal: false,
+    });
     let value = WHEEL_VALS.get(position)
     this.spinWheel(value)
   };

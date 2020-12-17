@@ -5,7 +5,6 @@ const SolvePhraseModal = (props) => {
   console.log(props);
   return (
     <Modal open={props.open}>
-      <Header>Solve Phrase</Header>
       <Modal.Content>
         <Form onSubmit={props.solve}>
           <Label>Phrase:</Label>
