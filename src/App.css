@@ -90,14 +90,15 @@
   flex: auto;
 }
 .team-column {
-  display: table-cell;
   align-items: center;
   width:400px;
+  text-align: left;
 }
 .score {
-  display: block;
+  width: 200px;
   background-color: rgb(248, 225, 225);
   border-radius: 1px;
+  text-align: right;
 }  
 .vowel {
   border: solid gold 3px;

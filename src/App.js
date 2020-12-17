@@ -71,7 +71,7 @@ class App extends Component {
                         spinWheel = {this.spinWheel}
                         solve = {this.solve}
         
-        />   */}
+        />    */}
         <PlayerContainer
             players={this.state.players}
         />
