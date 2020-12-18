@@ -4,6 +4,9 @@ A React-themed spin on the classic Wheel of Fortune gameshow, built in React!
 
 ### &#x1F535; How to Play
 
+<a target="_blank" href="https://wheel-of-reaction.herokuapp.com/">PLAY HERE</a> (Not optimized for mobile)
+
+RULES
 - Players take turns spinning the wheel and then guessing a consonant in the current puzzle 
 - Calling a correct letter earns the value of the landed spin multiplied by the number of times that the letter appears in the puzzle
 - If player guesses correctly, they can take three possible actions:
@@ -77,6 +80,7 @@ DevOps
 - Account creation
 - High Score Leader Board
 - Final and Bonus rounds
+- Mobile Optimization
 
 ### &#x1F535; Credits
 Wheel design and function modeled after elements of the following projects:
