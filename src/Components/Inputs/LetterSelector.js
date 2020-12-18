@@ -24,7 +24,7 @@ function LetterSelector(props) {
     }
 
     return (
-        <div id="button-container">
+        <div className="button-container">
             {ALPHABET.map(letter => (
                 <div className={resolveClass(letter)} onClick={inputLetter} key={letter} id={letter}>{letter}</div>
             ))}

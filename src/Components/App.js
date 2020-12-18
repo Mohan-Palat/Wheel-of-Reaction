@@ -50,7 +50,7 @@ class App extends Component {
       sounds: {
         currentSound: '',
         status: 'STOPPED',
-        on: false,
+        on: true,
         muteIcon: IMAGES.soundOn 
       }
     };
@@ -71,10 +71,11 @@ class App extends Component {
             newRound={this.newRound}
             triggerSound={this.triggerSound}
           />
-          <PlayerContainer
+          
+        </div>
+        <PlayerContainer
             players={this.state.players}
           />
-        </div>
         {this.state.sounds.on ? 
           <Sound
             url={this.state.currentSound}

@@ -22,15 +22,15 @@ class InputContainer extends Component {
             usedLetters={this.props.board.usedLetters}
             inputLetter={this.props.inputLetter}
            /> :
-           <PlayerOptions
-            openAndSolve={this.openAndSolve}
-            spinWheel={this.openAndSpin}
-            newRound={this.props.newRound}
-            board={this.props.board}
-           />
+          
+            <PlayerOptions
+              openAndSolve={this.openAndSolve}
+              spinWheel={this.openAndSpin}
+              newRound={this.props.newRound}
+              board={this.props.board}
+            /> 
+          
         }
-        
-        
         
         <SpinWheelModal
           open={this.state.showSpinWheelModal}
@@ -42,6 +42,7 @@ class InputContainer extends Component {
           open={this.state.showSolvePhraseModal}
           solve={this.handleSolve}
         />
+        
       </>
     );
   }
@@ -62,7 +63,7 @@ class InputContainer extends Component {
       this.setState({
         showSpinWheelModal: false,
       });
-    }, 3000);
+    }, 1500);
     
     let value = WHEEL_VALS.get(position);
     this.props.spinWheel(value);

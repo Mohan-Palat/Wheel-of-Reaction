@@ -40,6 +40,17 @@ function BoardContainer(props) {
                 <div id="category">
                     {props.board.currentCategory.toUpperCase()}
                 </div>
+                {props.board.currentSpin > -1 ?
+                
+                    <div id="current-spin">
+                        <h1>Current Spin:</h1>
+                            <div id="spin-amount">
+                                <img src={IMAGES.reactWhite} alt="react"/>
+                                {props.board.currentSpin}
+                            </div>
+                    </div> : null
+                }
+
             </div>
     )
 

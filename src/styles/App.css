@@ -1,3 +1,8 @@
+.App{
+  min-height: 100vh;
+  background: rgb(239, 240, 239);
+}
+
 #board-container {
   display: flex;
   flex-direction: column;
@@ -7,6 +12,10 @@
   padding: 40px;
 
 
+}
+
+aside{
+  background-color: grey;
 }
 
 #board-rows {
@@ -25,22 +34,52 @@
   font-family: 'Noto Sans TC', sans-serif;
 }
 
-#button-container{
+.button-container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 830px;
 }
 
-#button-container > div{
+.button-container > div{
   display: flex;
   margin: 5px;
-  padding: 19px 25px;
+  padding: 17px 25px;
   color: white;
-  background: grey;
-  text-align: center;
+  background: #2185d0;
   font-size: 20px;
+  width: 15px;
   border-radius: 10%;
+  user-select: none;
   
+}
+
+#current-spin{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 420px;
+  left: 38px;
+  color: white;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+#current-spin > h1 {
+  font-size: 20px;
+}
+
+#spin-amount {
+  display: flex;
+  font-size: 35px;
+  align-items: center;
+}
+
+#spin-amount > img{
+  width: 50px;
+}
+
+.vowel:hover {
+  background: red;
 }
 
 #currency {
@@ -111,32 +150,63 @@
   background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgb(32, 32, 99) 48%, rgba(2,0,36,0) 100%);
   border-radius: 3%;
 } 
-.vowel:hover {
-  border: solid gold 3px;
-}
+
 
 .used {
   opacity: 50%;
+}
+
+#wheel-btn-container{
+  display: flex;
+
+
+}
+
+#wheel-btn-container > h1{
+  font-size: 50px;
+  color: rgb(238, 87, 87);
+  -webkit-text-stroke: 1px black;
+  margin: 15px;
+  padding: 20px;
+}
+
+#wheel-btn{
+  width: 130px;
+  
+  
 }
 
 .player{
   width: 130px;
   border-radius: 4%;
   padding: 5px;
+  margin: 25px;
   box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.267);
 }
 
+#menu{
+  display: flex;
+  justify-content: center;
+}
+
+#player-options{
+  margin: 35px;
+}
+
 #menu-panel{
-  background: rgb(238, 238, 238);
-  box-shadow: 5px 0 3px 2px rgba(0, 0, 0, 0.589);
+  display: flex;
+  justify-content: center;
+  background: rgb(218, 218, 218);
+  height: 150px;
+  box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.267);
 }
 
 #player-container{
   display: flex;
-  justify-content: space-around;
-  padding: 15px;
-  margin-top: 15px;
-  box-shadow: 0px -6px 10px 1px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  align-self: flex-start;
 }
 
 .round-score {
@@ -179,9 +249,26 @@
   margin-right: 3px;
 }
 
+.red-select {
+  box-shadow: 0 0 30px 12px rgb(243, 75, 75);
+}
+
+.blue-select {
+  box-shadow: 0 0 30px 12px rgb(65, 179, 255);
+}
+
+.yellow-select {
+  box-shadow: 0 0 30px 12px rgb(255, 216, 89);
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .green > img {
     animation: App-logo-spin infinite 30s linear;
+  }
+
+  #wheel-btn:hover {
+    animation: App-logo-spin infinite 2s linear;
   }
 }
 

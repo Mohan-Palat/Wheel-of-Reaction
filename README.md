@@ -1,32 +1,34 @@
 #  **Wheel of Reaction**
 
-Wheel Of Fortune -  guess hidden phrases by guessing letters one at a time. 
+A React-themed spin on the classic Wheel of Fortune gameshow, built in React!
 
-### Installation
+### &#x1F535; How to Play
 
-No installation
+- Players take turns spinning the wheel and then guessing a consonant in the current puzzle 
+- Calling a correct letter earns the value of the landed spin multiplied by the number of times that the letter appears in the puzzle
+- If player guesses correctly, they can take three possible actions:
+   - Buy a vowel for a flat fee of $250. A contestant can continue to buy until out of money or no vowels remain
+   - Attempt to solve the puzzle
+   - Spin again and take another guess (unless their spin lands on a turn-losing space like bankrupt)
 
-### &#x1F535; APP URL
-<a href="#" target="_blank">#TBD</a>
+- Control passes to the next contestant clockwise if the contestant: 
+   - Lands a spin on Lose a Turn or Memory Leak (Bankrupt)
+   - Calls a letter that is not in the puzzle
+   - Attempts unsuccessfully to solve the puzzle
+
 
 
 ### GitHub Project Repo
 <a href="https://github.com/d-mayo/project4-frontend/" target="_blank">React Frontend</a><br>
 <a href="https://github.com/ycjessie/project4-backend/" target="_blank">Express MongoDB Backend</a>
 
-### &#x1F535; Project Team
-Design - Development - Layout
+### &#x1F535; Project Duties
+
 
 <ul>
-<li>Jessie Chen</li>
-<li>Lawrence DeMaio</li>
-<li>Cory Trast</li>
-</ul>
-
-
-### &#x1F535; Approach 
-<ul>
-<li></li>
+<li>Lawrence DeMaio - Front End Design, Game Logic, UI Design, Graphic Design</li>
+<li>Jessie Chen - Backend Design, Component Design, Testing, Documentation </li>
+<li>Cory Trast - Backend Design, Component Design, UI, Testing</li>
 </ul>
 
 ### &#x1F535; User Stories
@@ -34,10 +36,8 @@ Design - Development - Layout
 * As a user, can call a correct letter earns the value of the landed spin multiplied by the number of times that the letter appears in the puzzle
 * As a user, when guessing correctly, they can either Buy a vowel for a flat fee of $250. 
 * As a user, can continue to buy until out of money or no vowels remain OR Attempt to solve the puzzle OR Spin again and take another guess (unless their spin lands on a turn-losing space like bankrupt)
-* As a user, with the most money by the final round wins.
- 
 
-* Stretch - As a user can run the Mocha javascrip testing
+
 
 
 ### &#x1F535; **Technologies Used**
@@ -60,24 +60,9 @@ Middleware
 
 </ul>
 Backend 
-   <ul>
-   <li><a href="https://www.nodejs.org/" target="_blank"> Node.js</a></li>
-   <li>RESTful Routes <ul>
-   <li>Route methods<a href="https://expressjs.com/" target="_blank"> Express.js</a>
-   <li>Route Testing<a href="https://www.postman.com/" target="_blank"> Postman</a></li></li></ul>
-   <li>Database<a href="https://www.mongodb.com/" target="_blank"> MongoDB</a></li>
-   <li>Data Modeling<a href="https://www.mongoose.com/" target="_blank"> Mongoose ODM</a></li>
-   <ul>
-      <li>Model/Schema</li>
-      <li>MongoDB connection</li>
-      <li>Authentication</li>
-      <li>Authorization</li>
-   </ul>
-   <li>Embedded Javascript Template<a href="https://ejs.co/" target="_blank"> EJS</a> </li>
-   <li>Javascript Test Framework<a href="https://mochajs.org/" target="_blank"> Mocha</a> </li>
-   
-   </ul>
 
+ - <a href="https://github.com/ycjessie/project4-backend/" target="_blank"> See Backend Repo</a>
+   
 DevOps
 <ul>
 <li>Heroku - Platform as a service (PaaS) used to build and deploy applications</li>
@@ -88,10 +73,10 @@ DevOps
 
 
 ### &#x1F535; Future Enhancement
-<ul>
-<li>Save the Game</li>
-<li>Multiple players over the web</li>
-</ul>
+- Local Data Persistence 
+- Account creation
+- High Score Leader Board
+- Final and Bonus rounds
 
 ### &#x1F535; Credits
 Wheel design and function modeled after elements of the following projects:
@@ -104,6 +89,7 @@ Images
 <ul>
 <li><a target="_blank" href="https://icons8.com/icons/set/speaker">Speaker icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
 <li>Money Bag Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
+<li>Background Image from <a href="https://wallpapercave.com/w/6AGfPRi" title="Wallpaperscave">www.wallpaperscave.com</a> </li>
 </ul>
 
 Sounds

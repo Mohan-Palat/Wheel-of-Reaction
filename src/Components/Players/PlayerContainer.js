@@ -1,11 +1,21 @@
 import React from "react";
 import { IMAGES } from "../../imports/images.js";
 
+
+
 function PlayerContainer(props) {
+  function setColorClass(name, index){
+    if(props.players.currentPlayerIndex === index){
+      return `player ${name} ${props.players.getCurrentPlayer()}-select`
+    }
+    return `player ${name}`
+  
+  }
+
   return (
     <div id="player-container">
       {props.players.name.map((name, index) => {
-        let color = `player ${name}`
+        let color = setColorClass(name, index);
         return (
           <div className={color}>
             <div class="round-score">
