@@ -26,7 +26,7 @@ A React-themed spin on the classic Wheel of Fortune gameshow, built in React!
 
 
 <ul>
-<li>Lawrence DeMaio - Front End Design, Game Logic, UI Design, Graphic Design</li>
+<li>Lawrence DeMaio - Front End Design, Game Logic, UI Design, Component Design, Graphics</li>
 <li>Jessie Chen - Backend Design, Component Design, Testing, Documentation </li>
 <li>Cory Trast - Backend Design, Component Design, UI, Testing</li>
 </ul>
