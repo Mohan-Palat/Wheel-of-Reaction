@@ -1,5 +1,6 @@
 import React from 'react';
 import BoardTile from './BoardTile';
+import {IMAGES} from '../../imports/images.js';
 
 
 
@@ -19,6 +20,8 @@ function BoardContainer(props) {
    
     return (
             <div id="board-container">
+                <img id="board-backdrop" src={IMAGES.boardBackdrop} alt="board backdrop"/>
+                <img id="mute-icon" src={props.sounds.muteIcon} alt="mute" onClick={props.toggleSounds}/>
                 <div id="board-rows">
                     <div id="display-1">
                         {displayBoard[0]}

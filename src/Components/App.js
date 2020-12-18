@@ -50,7 +50,7 @@ class App extends Component {
       sounds: {
         currentSound: '',
         status: 'STOPPED',
-        on: true,
+        on: false,
         muteIcon: IMAGES.soundOn 
       }
     };
@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BoardContainer board={this.state.board} />
+        <BoardContainer board={this.state.board} sounds={this.state.sounds} toggleSounds={this.toggleSounds} />
         <div id="menu-panel">
           <InputContainer
             spinWheel={this.spinWheel}
@@ -82,7 +82,7 @@ class App extends Component {
             onFinishedPlaying={this.endSounds}
           /> : null
         }
-        <img src={this.state.sounds.muteIcon} alt="mute" onClick={this.toggleSounds}/>
+        
         
       </div>
     );

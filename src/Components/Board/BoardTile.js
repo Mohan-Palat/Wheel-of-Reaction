@@ -1,5 +1,6 @@
 import React from 'react';
 import {ALPHABET} from "../../imports/constants.js"
+import {IMAGES} from "../../imports/images.js"
 
 function BoardTile(props) {
 
@@ -12,7 +13,11 @@ function BoardTile(props) {
 
     return (
         <div className={"tile " + show}>
-            {props.letter.toUpperCase()}
+            {props.letter === '*' ? 
+                <img alt="react" src={IMAGES.react}/>:
+                props.letter.toUpperCase()
+            }
+            
         </div>
     )
 

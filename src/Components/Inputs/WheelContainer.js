@@ -30,7 +30,6 @@ class WheelContainer extends Component {
     if(this.state.clicked){
       return;
     }
-    //this.props.triggerSound(SOUNDS.wheelSpin);
     //spins wheel randomly 
     let randomNum = 7.5;
     randomNum +=  180 + (15 * Math.round(Math.random() * 24));

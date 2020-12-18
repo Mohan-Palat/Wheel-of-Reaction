@@ -1,4 +1,4 @@
-#  **Project 4**
+#  **Wheel of Reaction**
 
 Wheel Of Fortune -  guess hidden phrases by guessing letters one at a time. 
 
@@ -93,10 +93,26 @@ DevOps
 <li>Multiple players over the web</li>
 </ul>
 
-### &#x1F535; Inspiration
+### &#x1F535; Credits
+Wheel design and function modeled after elements of the following projects:
 <ul>
-<li> <a href="https://codepen.io/twentysix/pen/abopqNp?editors=1111" target="_blank"> Wheel of fortune</a> by twentysix </li>
-<li> <a href="https://codepen.io/andere_s/pen/oqvroJ" target="_blank"> Wheel of fortune</a> by Andres </li>
-<a target="_blank" href="https://icons8.com/icons/set/speaker">Speaker icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+   <li> <a href="https://codepen.io/twentysix/pen/abopqNp?editors=1111" target="_blank"> Wheel of fortune</a> by twentysix </li>
+   <li> <a href="https://codepen.io/andere_s/pen/oqvroJ" target="_blank"> Wheel of fortune</a> by Andres </li>
 </ul>
+
+Images
+<ul>
+<li><a target="_blank" href="https://icons8.com/icons/set/speaker">Speaker icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+<li>Money Bag Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
+</ul>
+
+Sounds
+<ul>
+   <li>Wheel click sound provided by ZapSplat
+   </li>
+   <li>All other sounds provided courtesy of soundboard.com</li>
+
+</ul>
+
+
 

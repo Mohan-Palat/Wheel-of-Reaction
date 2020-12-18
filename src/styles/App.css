@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: grey;
+  background-image: url('https://wallpapercave.com/wp/6AGfPRi.jpg');
+  background-size: cover;
+  padding: 40px;
+
 
 }
 
@@ -10,7 +13,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: grey;
+  padding-top: 35px;
+  z-index: 1;
 
 }
 
@@ -39,8 +43,8 @@
   
 }
 
-#category {
-  text-align: center;
+#currency {
+  width: 35px;
 }
 
 .tile {
@@ -52,8 +56,26 @@
 }
 
 .green {
-  background: green;
+  background: #282c33;
   color: transparent;
+}
+
+.green > img {
+  width: 40px;
+  margin-top: 11px;
+  margin-left: 1.5px;
+}
+
+.red {
+  background: rgb(243, 75, 75);
+}
+
+.blue {
+  background: rgb(65, 179, 255);
+}
+
+.yellow {
+  background: rgb(255, 216, 89);
 }
 
 .hide {
@@ -75,10 +97,12 @@
   user-select: none;
   justify-content: center;
   margin: 10px;
+  margin-top: 50px;
   padding-top: 14px;
-  color: white;
+  color: #67daf9;
   font-family: 'Noto Sans TC', sans-serif;
   font-size: 35px;
+  text-align: center;
   width: 1000px;
   height: 60px;
   border-top: white solid 2px;
@@ -87,7 +111,7 @@
   background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgb(32, 32, 99) 48%, rgba(2,0,36,0) 100%);
   border-radius: 3%;
 } 
-.vowel {
+.vowel:hover {
   border: solid gold 3px;
 }
 
@@ -95,83 +119,77 @@
   opacity: 50%;
 }
 
-* {
-  box-sizing: border-box;
-}
-table {
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-td,th {
-  text-align: center;
-  border: solid 2px #ffffff;
-  font-size: 20px;
-  padding: 6px;
-}
-td {
-  color: white;
-  font-weight: bold;
-}
-.round-red-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(208, 55, 45);
-}
-.total-red-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(208, 55, 45,0.2);
-}
-.round-yellow-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(213, 178, 88);
-}
-.total-yellow-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(213, 178, 88,0.2);
-}
-.round-blue-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(65, 81, 217);
-}
-.total-blue-td {
-  color: white;
-  font-weight: bold;
-  background: rgba(65, 81, 217,0.2);
-}
-.check {
-  font-size: 20px;
-  width:100px;
-}
-th:first-child,
-td:first-child {
-  font-weight: bold;
-  color: black;
+.player{
+  width: 130px;
+  border-radius: 4%;
+  padding: 5px;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.267);
 }
 
-@media screen and (max-width: 800px) {
-  .check {
-    font-size: 20px;
+#menu-panel{
+  background: rgb(238, 238, 238);
+  box-shadow: 5px 0 3px 2px rgba(0, 0, 0, 0.589);
+}
+
+#player-container{
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: 0px -6px 10px 1px rgba(0, 0, 0, 0.25);
+}
+
+.round-score {
+  display: flex;
+  align-items: center;
+}
+
+
+.round-score > p {
+  color: white;
+  font-size: 30px;
+  margin-top: -2px;
+  margin-left: 3px;
+}
+
+#mute-icon{
+  position: absolute;
+  top: 14px;
+  right: 27px;
+  width: 55px;
+}
+
+#board-backdrop{
+  position: absolute;
+  z-index: 0;
+  width: 923px;
+  top: -11px;
+
+}
+
+.total-score{
+  display: flex;
+  justify-content: flex-end;
+  opacity: 75%;
+}
+
+#round-money{
+  width: 18px;
+  height: 19px;
+  margin-right: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .green > img {
+    animation: App-logo-spin infinite 30s linear;
   }
-  tr {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  td,th {
-    display: block;
-    width: 33%;
-    font-size: 25px;
-  }
-  th:first-child,
-  td:first-child {
-    background: #d3d3d3;
-    width: 100%;
+  to {
+    transform: rotate(360deg);
   }
 }
